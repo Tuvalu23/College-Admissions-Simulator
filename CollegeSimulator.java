@@ -299,6 +299,7 @@ private static List<String> collegeList = Arrays.asList(
                 break;
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input. Please enter a valid number.");
+                System.out.println();
             }
         }
         return value;
@@ -320,6 +321,7 @@ private static List<String> collegeList = Arrays.asList(
                 isValidInput = true; // Break out of the loop if parsing is successful
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input. Please enter a valid number.");
+                System.out.println();
             }
         }
     
@@ -417,6 +419,7 @@ private static List<String> collegeList = Arrays.asList(
                 }
             } else {
                 System.out.println("Invalid option. Please restart the program and choose a valid option.");
+                System.out.println();
                 break;  // Terminate the loop if an invalid option is chosen
             }
         }
@@ -480,31 +483,16 @@ private static List<String> collegeList = Arrays.asList(
         double yourFate = random.nextDouble() * 100;
 
         if (modifiedChances > yourFate + 20) {
-            return "Very Large Admitted";
-        }
-        else if (modifiedChances > yourFate + 13) {
-            return "Large Admitted";
-        }
-        else if (modifiedChances > yourFate + 6) {
-            return "Medium Admitted";
+            return "Scholarship";
         }
         else if (modifiedChances > yourFate) {
-            return "Close Admitted";
+            return "Admitted";
         }
         else if (modifiedChances + 10 > yourFate) {
             return "Waitlisted";
         }
-        else if (modifiedChances + 15 > yourFate) {
-            return "Close Rejected";
-        }
-        else if (modifiedChances + 22 > yourFate) {
-            return "Medium Rejected";
-        }
-        else if (modifiedChances + 28 > yourFate) {
-            return "Large Rejected";
-        }
         else {
-            return "Very Large Rejected";
+            return "Rejected";
         }
 
     }
@@ -525,6 +513,7 @@ private static List<String> collegeList = Arrays.asList(
         Scanner scanner = new Scanner(System.in);
         ArrayList<String> acceptedColleges = new ArrayList<>();
         ArrayList<String> waitlistColleges = new ArrayList<>();
+        ArrayList<String> scholarshipColleges = new ArrayList<>();
     
         for (int i = 0; i < colleges.length; i++) {
             String collegeName = getCollegeById(colleges[i]);
@@ -545,30 +534,19 @@ private static List<String> collegeList = Arrays.asList(
             System.out.println();
             System.out.println("--------------------------------------------------------------------------------------------------------------");
 
-            if (result.equals("Very Large Admitted")) {
-                System.out.println("Congratulations! Your outstanding achievements have earned you a very large margin of admission to " + collegeName);
-                acceptedColleges.add(collegeName);
-            } else if (result.equals("Large Admitted")) {
-                System.out.println("Congratulations! Your exceptional achievements have secured a large margin of admission to " + collegeName);
-                acceptedColleges.add(collegeName);
-            } else if (result.equals("Medium Admitted")) {
-                System.out.println("Congratulations! Your application to " + collegeName + " has demonstrated significant merit, resulting in a successful admission.");
-                acceptedColleges.add(collegeName);
-            } else if (result.equals("Close Admitted")) {
-                System.out.println("Congratulations! Your application to " + collegeName + " has narrowly met our rigorous standards.");
+            if (result.equals("Scholarship")) {
+                System.out.println("Congratulations! You have been awarded a scholarship to attend " + collegeName + "!");
+                scholarshipColleges.add(collegeName);
+            }            
+            else if (result.equals("Admitted")) {
+                System.out.println("Congratulations! You have been admitted to " + collegeName + "!");
                 acceptedColleges.add(collegeName);
             } else if (result.equals("Waitlisted")) {
-                System.out.println("Your application to " + collegeName + " has been waitlisted. While we cannot offer admission at this moment, there may be an opportunity for you to join our community.");
+                System.out.println("Your application to " + collegeName + " has been waitlisted. There's a possibility of admission if spots become available.");
                 waitlistColleges.add(collegeName);
-            } else if (result.equals("Close Rejected")) {
-                System.out.println("We regret to inform you that your application to " + collegeName + " narrowly missed our competitive standards.");
-            } else if (result.equals("Medium Rejected")) {
-                System.out.println("Thank you for your application to " + collegeName + ". Despite notable accomplishments, we are unable to offer admission.");
-            } else if (result.equals("Large Rejected")) {
-                System.out.println("We regret to inform you that your application to " + collegeName + " fell short of our standards.");
-            } else if (result.equals("Very Large Rejected")) {
-                System.out.println("We appreciate your interest in " + collegeName + ". Regrettably, your application did not align with our standards.");
-            }    
+            } else if (result.equals("Rejected")) {
+                System.out.println("We regret to inform you that your application to " + collegeName + " has been rejected.");
+            }            
             else {
                 System.out.println("Error: Your application was not successfully submitted.");
             }
@@ -584,6 +562,9 @@ private static List<String> collegeList = Arrays.asList(
         System.out.println("Accepted Colleges:");
         for (String college : acceptedColleges) {
             System.out.println(college);
+        }
+        for (String college : scholarshipColleges) {
+            System.out.println(college + " [SCHOLARSHIP]");
         }
 
         System.out.println();
@@ -602,6 +583,11 @@ private static List<String> collegeList = Arrays.asList(
         for (String college : acceptedColleges) {
             System.out.println(college);
         }
+        for (String college : scholarshipColleges) {
+            System.out.println(college + " [SCHOLARSHIP]");
+        }
+
+        acceptedColleges.addAll(scholarshipColleges);
 
         int score = calculateScore(acceptedColleges);
         double avCAP = calculateRawScore(acceptedColleges, score);
@@ -615,7 +601,8 @@ private static List<String> collegeList = Arrays.asList(
         int myCollegeID = 0;
         boolean validInput = false;
 
-        while (!validInput && !acceptedColleges.isEmpty()) {
+        if (!acceptedColleges.isEmpty()) {
+        while (!validInput) {
             System.out.println("Which college would you like to attend? Enter the position of the college on this list:");
             String input = scanner.next();
             // Check if the input is an integer
@@ -626,129 +613,33 @@ private static List<String> collegeList = Arrays.asList(
                     validInput = true;  // Set the flag to exit the loop
                 } else {
                     System.out.println("Invalid input. Please enter a valid position from the list.");
+                    System.out.println();
                 }
             } else {
                 System.out.println("Invalid input. Please enter a valid integer position from the list.");
+                System.out.println();
             }
         }
         
 
 if (validInput) {
+    System.out.println("--------------------------------------------------------------------------------------------------------------");
     System.out.println("You are now enrolled in " + acceptedColleges.get(myCollegeID - 1) + "! Congratulations!");
+    System.out.println("--------------------------------------------------------------------------------------------------------------");
     System.out.println();
-} else {
-    System.out.println("No colleges available. Exiting the selection process.");
+} 
+}else {
+    System.out.println("--------------------------------------------------------------------------------------------------------------");
+    System.out.println("Unfortunately, none of your college applications resulted in acceptance. Consider exploring opportunities at your local Community College to continue your academic journey.");
+    System.out.println("--------------------------------------------------------------------------------------------------------------");
 }
+
     }
     
 
 
 
     public static int getCollegeIdByName(String collegeName) {
-    
-        List<String> collegeList = Arrays.asList(
-            "Harvard University",
-    "Massachusetts Institute of Technology (MIT)",
-    "Stanford University",
-    "Yale University",
-    "Princeton University",
-    "Duke University",
-    "Columbia University",
-    "University of Pennsylvania (UPenn)",
-    "Northwestern University",
-    "Dartmouth College",
-    "Brown University",
-    "Vanderbilt University",
-    "Cornell University",
-    "University of Chicago (UChicago)",
-    "Rice University",
-    "California Institute of Technology (Caltech)",
-    "Washington University in St. Louis (WashU)",
-    "Johns Hopkins University (JHU)",
-    "University of California, Los Angeles (UCLA)",
-    "University of Southern California (USC)",
-    "University of Michigan",
-    "Georgetown University",
-    "University of Notre Dame",
-    "University of California, Berkeley",
-    "Emory University",
-    "Carnegie Mellon University (CMU)",
-    "Tufts University",
-    "University of North Carolina at Chapel Hill (UNC Chapel Hill)",
-    "University of Virginia (UVA)",
-    "University of Florida (UFlorida)",
-    "Georgia Institute of Technology (Georgia Tech)",
-    "New York University (NYU)",
-    "University of California, Davis (UCD)",
-    "University of California, San Diego (UCSD)",
-    "University of Illinois Urbana-Champaign (UIUC)",
-    "Boston College (BC)",
-    "University of Texas at Austin (UT Austin)",
-    "Wake Forest University",
-    "University of California, Santa Barbara (UCSB)",
-    "Boston University (BU)",
-    "College of William & Mary (W&M)",
-    "University of Wisconsin-Madison (UW Madison)",
-    "University of Washington, Seattle (UW Seattle)",
-    "Purdue University",
-    "University of Rochester",
-    "Lehigh University",
-    "University of California, Irvine (UCI)",
-    "University of Miami",
-    "Northeastern University",
-    "Texas A&M University",
-    "Case Western Reserve University",
-    "University of Maryland (UMD)",
-    "Santa Clara University (SCU)",
-    "Tulane University",
-    "George Washington University (GW)",
-    "University of Georgia (UGA)",
-    "Virginia Tech",
-    "University of Minnesota Twin Cities (UM Twin Cities)",
-    "Ohio State University (OSU)",
-    "Villanova University",
-    "Rensselaer Polytechnic Institute (RPI)",
-    "Southern Methodist University (SMU)",
-    "North Carolina State University (NCSU)",
-    "Brigham Young University (BYU)",
-    "Michigan State University (MSU)",
-    "Indiana University Bloomington (IU Bloomington)",
-    "University of Connecticut (UConn)",
-    "Brandeis University",
-    "Florida State University (FSU)",
-    "University of Pittsburgh (Pitt)",
-    "Loyola Marymount University",
-    "Worcester Polytechnic Institute (WPI)",
-    "Pennsylvania State University (PSU)",
-    "Pepperdine University",
-    "Syracuse University",
-    "Clemson University",
-    "University of Utah (UUtah)",
-    "University of Massachusetts Amherst (UMass Amherst)",
-    "University of Delaware (UDelaware)",
-    "State University of New York at Binghamton (SUNY Binghamton)",
-    "University of San Diego (USD)",
-    "State University of New York at Buffalo (SUNY Buffalo)",
-    "University of Iowa (UIowa)",
-    "Saint Louis University (SLU)",
-    "Yeshiva University",
-    "University of Arizona",
-    "Texas Christian University (TCU)",
-    "American University",
-    "Stevens Institute of Technology",
-    "Rutgers University",
-    "Drexel University",
-    "State University of New York at Stony Brook (SUNY Stony Brook)",
-    "University of Denver",
-    "Marquette University",
-    "Baylor University",
-    "Colorado School of Mines",
-    "University of Colorado Boulder (UC Boulder)",
-    "University of California, Riverside (UCR)",
-    "Creighton University",
-    "University of San Francisco (USF)"
-        );
-    
         int index = collegeList.indexOf(collegeName);
         if (index != -1) {
             // College name found, return the corresponding college ID (adding 1)

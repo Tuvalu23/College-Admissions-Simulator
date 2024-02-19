@@ -4,16 +4,16 @@ public class collegeChances {
         int tier = getStudentTier(num);
         if (college >= 1 && college <= 4) { // tier 1
             if (tier == 1) {
-                return (35 + (Math.random() * 8 - 4));
+                return (39 + (Math.random() * 8 - 4));
             }
             else if (tier == 2) {
-                return (26 + (Math.random() * 8 - 4));
+                return (33 + (Math.random() * 8 - 4));
             }
             else if (tier == 3) {
-                return (18 + (Math.random() * 8 - 4));
+                return (22 + (Math.random() * 8 - 4));
             }
             else if (tier == 4) {
-                return (14 + (Math.random() * 6 - 3));
+                return (15 + (Math.random() * 6 - 3));
             }
             else if (tier == 5) {
                 return (11 + (Math.random() * 6 - 3));
@@ -40,64 +40,64 @@ public class collegeChances {
     
         else if (college >= 5 && college <= 13) { // tier 2
             if (tier == 1) {
-                return (48 + (Math.random() * 8 - 4));
+                return (50 + (Math.random() * 8 - 4));
             }
             else if (tier == 2) {
-                return (38 + (Math.random() * 6 - 3));
+                return (45 + (Math.random() * 6 - 3));
             }
             else if (tier == 3) {
-                return (30 + (Math.random() * 6 - 3));
+                return (33 + (Math.random() * 6 - 3));
             }
             else if (tier == 4) {
-                return (23 + (Math.random() * 6 - 3));
+                return (25 + (Math.random() * 6 - 3));
             }
             else if (tier == 5) {
-                return (17 + (Math.random() * 6 - 3));
+                return (19 + (Math.random() * 6 - 3));
             }
             else if (tier == 6) {
-                return (14 + (Math.random() * 6 - 3));
+                return (15 + (Math.random() * 6 - 3));
             }
             else if (tier == 7) {
-                return (9 + (Math.random() * 2 - 1));
+                return (11 + (Math.random() * 2 - 1));
             }
             else if (tier == 8) {
-                return (5 + (Math.random() * 0.4 - 0.2));
+                return (6 + (Math.random() * 0.4 - 0.2));
             }
             else if (tier == 9) {
-                return (3 + (Math.random() * 0.2 - 0.1));
+                return (4 + (Math.random() * 0.2 - 0.1));
             }
             else if (tier == 10) {
-                return (1 + (Math.random() * 0.2 - 0.1));
+                return (2 + (Math.random() * 0.2 - 0.1));
             }
             else {
-                return 0.2 + (Math.random() * 0.1 - 0.05);
+                return 1 + (Math.random() * 0.1 - 0.05);
             }
         }
     
         else if (college >= 14 && college <= 23) { // tier 3
             if (tier == 1) {
-                return (56 + (Math.random() * 10 - 5));
+                return (68 + (Math.random() * 10 - 5));
             }
             else if (tier == 2) {
-                return (47 + (Math.random() * 8 - 4));
+                return (60 + (Math.random() * 8 - 4));
             }
             else if (tier == 3) {
-                return (39 + (Math.random() * 6 - 3));
+                return (46 + (Math.random() * 6 - 3));
             }
             else if (tier == 4) {
-                return (28 + (Math.random() * 6 - 3));
+                return (36 + (Math.random() * 6 - 3));
             }
             else if (tier == 5) {
-                return (23 + (Math.random() * 6 - 3));
+                return (27 + (Math.random() * 6 - 3));
             }
             else if (tier == 6) {
-                return (17 + (Math.random() * 6 - 3));
+                return (22 + (Math.random() * 6 - 3));
             }
             else if (tier == 7) {
-                return (13 + (Math.random() * 4 - 2));
+                return (17 + (Math.random() * 4 - 2));
             }
             else if (tier == 8) {
-                return (7 + (Math.random() * 2 - 1));
+                return (10 + (Math.random() * 2 - 1));
             }
             else if (tier == 9) {
                 return (4 + (Math.random() * 2 - 1));
@@ -110,54 +110,54 @@ public class collegeChances {
             }
         }
     
-        else if (college >= 14 && college <= 37) { // tier 4
+        else if (college >= 23 && college <= 37) { // tier 4
             if (tier == 1) {
-                return (68 + (Math.random() * 10 - 5));
+                return (75 + (Math.random() * 10 - 5));
             }
             else if (tier == 2) {
-                return (59 + (Math.random() * 8 - 4));
+                return (67 + (Math.random() * 8 - 4));
             }
             else if (tier == 3) {
-                return (51 + (Math.random() * 8 - 4));
+                return (58 + (Math.random() * 8 - 4));
             }
             else if (tier == 4) {
-                return (44 + (Math.random() * 8 - 4));
+                return (51 + (Math.random() * 8 - 4));
             }
             else if (tier == 5) {
-                return (38 + (Math.random() * 6 - 3));
+                return (44 + (Math.random() * 6 - 3));
             }
             else if (tier == 6) {
-                return (29 + (Math.random() * 6 - 3));
+                return (35 + (Math.random() * 6 - 3));
             }
             else if (tier == 7) {
-                return (22 + (Math.random() * 4 - 2));
+                return (27 + (Math.random() * 4 - 2));
             }
             else if (tier == 8) {
-                return (16 + (Math.random() * 2 - 1));
+                return (21 + (Math.random() * 2 - 1));
             }
             else if (tier == 9) {
-                return (9 + (Math.random() * 2 - 1));
+                return (14+ (Math.random() * 2 - 1));
             }
             else if (tier == 10) {
-                return (4 + (Math.random() * 0.2 - 0.1));
+                return (7 + (Math.random() * 0.2 - 0.1));
             }
             else {
-                return 2 + (Math.random() * 0.2 - 0.1);
+                return 3 + (Math.random() * 0.2 - 0.1);
             }
         }
 
         else if (college >= 38 && college <= 57) { // tier 5
             if (tier == 1) {
-                return (78 + (Math.random() * 10 - 5));
+                return (82 + (Math.random() * 10 - 5));
             }
             else if (tier == 2) {
-                return (70 + (Math.random() * 8 - 4));
+                return (75 + (Math.random() * 8 - 4));
             }
             else if (tier == 3) {
-                return (65 + (Math.random() * 8 - 4));
+                return (67 + (Math.random() * 8 - 4));
             }
             else if (tier == 4) {
-                return (57 + (Math.random() * 8 - 4));
+                return (58 + (Math.random() * 8 - 4));
             }
             else if (tier == 5) {
                 return (49 + (Math.random() * 6 - 3));
@@ -184,25 +184,25 @@ public class collegeChances {
     
         else if (college >= 58 && college <= 74) { // tier 6
             if (tier == 1) {
-                return (86 + (Math.random() * 12 - 6));
+                return (88 + (Math.random() * 12 - 6));
             }
             else if (tier == 2) {
-                return (78 + (Math.random() * 8 - 4));
+                return (81 + (Math.random() * 8 - 4));
             }
             else if (tier == 3) {
-                return (71 + (Math.random() * 8 - 4));
+                return (73 + (Math.random() * 8 - 4));
             }
             else if (tier == 4) {
-                return (64 + (Math.random() * 8 - 4));
+                return (65 + (Math.random() * 8 - 4));
             }
             else if (tier == 5) {
-                return (56 + (Math.random() * 8 - 4));
+                return (57 + (Math.random() * 8 - 4));
             }
             else if (tier == 6) {
-                return (44 + (Math.random() * 8 - 4));
+                return (46 + (Math.random() * 8 - 4));
             }
             else if (tier == 7) {
-                return (37 + (Math.random() * 6 - 3));
+                return (39 + (Math.random() * 6 - 3));
             }
             else if (tier == 8) {
                 return (29 + (Math.random() * 4 - 2));
@@ -226,31 +226,31 @@ public class collegeChances {
                 return (87 + (Math.random() * 8 - 4));
             }
             else if (tier == 3) {
-                return (78 + (Math.random() * 8 - 4));
+                return (80 + (Math.random() * 8 - 4));
             }
             else if (tier == 4) {
-                return (71 + (Math.random() * 8 - 4));
+                return (74 + (Math.random() * 8 - 4));
             }
             else if (tier == 5) {
-                return (63 + (Math.random() * 8 - 4));
+                return (65 + (Math.random() * 8 - 4));
             }
             else if (tier == 6) {
-                return (52 + (Math.random() * 8 - 4));
+                return (56 + (Math.random() * 8 - 4));
             }
             else if (tier == 7) {
-                return (43 + (Math.random() * 6 - 3));
+                return (45 + (Math.random() * 6 - 3));
             }
             else if (tier == 8) {
-                return (35 + (Math.random() * 4 - 2));
+                return (37 + (Math.random() * 4 - 2));
             }
             else if (tier == 9) {
-                return (26 + (Math.random() * 2 - 1));
+                return (28 + (Math.random() * 2 - 1));
             }
             else if (tier == 10) {
-                return (20 + (Math.random() * 2 - 1));
+                return (24 + (Math.random() * 2 - 1));
             }
             else {
-                return 15+ (Math.random() * 2 - 1);
+                return 18 + (Math.random() * 2 - 1);
             }
         }
         else {
@@ -260,10 +260,10 @@ public class collegeChances {
 
     public static String getType(double chance) {
         if (chance > 80) {
-            return "Safety";
+            return "Highly Likely";
         }
         else if (chance > 65) {
-            return "Hard Safety";
+            return "Safety";
         }
         else if (chance > 45) {
             return  "Target";
@@ -272,7 +272,7 @@ public class collegeChances {
             return "Hard Target";
         }
         else if (chance > 20) {
-            return "Low Reach";
+            return "Competitive";
         }
         else if (chance > 12) {
             return "Reach";
