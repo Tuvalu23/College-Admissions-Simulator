@@ -504,10 +504,10 @@ else if (44.4 * ACT > SAT) {
     }
 
     public static int getStudentTier(double num) {
-        if (num >= 98) {
+        if (num >= 97) {
             return 1;
         }
-        else if (num >= 95) {
+        else if (num >= 94) {
             return 2;
         }
         else if (num >= 91) {

@@ -414,8 +414,10 @@ private static List<String> collegeList = Arrays.asList(
     
                 int size = Math.min(rec.size(), collegesLeft);  // Limit the size to available slots
                 for (int i = 0; i < size; i++) {
-                    colleges.add(rec.get(i));
-                    collegesLeft--;
+                    if (!colleges.contains(rec.get(i))) {
+                        colleges.add(rec.get(i));
+                        collegesLeft--;
+                    }
                 }
             } else {
                 System.out.println("Invalid option. Please restart the program and choose a valid option.");
