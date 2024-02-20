@@ -478,11 +478,11 @@ private static List<String> collegeList = Arrays.asList(
         Random random = new Random();
         
         // Add a bit of randomness (+- 1-2%)
-        double randomFactor = random.nextDouble() * 10 - 5;
+        double randomFactor = random.nextDouble() * 10 - 6;
         double modifiedChances = chances + randomFactor;
 
         // Check if the modified chances are greater than a random value between 0 and 100
-        double yourFate = random.nextDouble() * 100;
+        double yourFate = random.nextDouble() * 100 - 1.5;
 
         if (modifiedChances > yourFate + 20) {
             return "Scholarship";
@@ -537,21 +537,76 @@ private static List<String> collegeList = Arrays.asList(
             System.out.println("--------------------------------------------------------------------------------------------------------------");
 
             if (result.equals("Scholarship")) {
-                System.out.println("Congratulations! You have been awarded a scholarship to attend " + collegeName + "!");
+                int v = (int) (Math.random() * 4);
+                switch (v) {
+                    case 0:
+                        System.out.println("Congratulations! You've earned a scholarship at " + collegeName + "!");
+                        break;
+                    case 1:
+                        System.out.println("Fantastic news! You've been awarded a scholarship to attend " + collegeName + "!");
+                        break;
+                    case 2:
+                        System.out.println("Celebrate! You've secured a scholarship for your studies at " + collegeName + "!");
+                        break;
+                    case 3:
+                        System.out.println("Great work! You're the recipient of a scholarship for " + collegeName + "!");
+                        break;
+                }
                 scholarshipColleges.add(collegeName);
-            }            
-            else if (result.equals("Admitted")) {
-                System.out.println("Congratulations! You have been admitted to " + collegeName + "!");
+            } else if (result.equals("Admitted")) {
+                int v = (int) (Math.random() * 4);
+                switch (v) {
+                    case 0:
+                        System.out.println("Congratulations! You've been admitted to " + collegeName + "!");
+                        break;
+                    case 1:
+                        System.out.println("Exciting news! You've gained admission to " + collegeName + "!");
+                        break;
+                    case 2:
+                        System.out.println("Wonderful! You're officially accepted at " + collegeName + "!");
+                        break;
+                    case 3:
+                        System.out.println("Hooray! You're in! Welcome to " + collegeName + "!");
+                        break;
+                }
                 acceptedColleges.add(collegeName);
             } else if (result.equals("Waitlisted")) {
-                System.out.println("Your application to " + collegeName + " has been waitlisted. There's a possibility of admission if spots become available.");
+                int v = (int) (Math.random() * 4);
+                switch (v) {
+                    case 0:
+                        System.out.println("Your application to " + collegeName + " is waitlisted. Further updates will follow.");
+                        break;
+                    case 1:
+                        System.out.println("Your application to " + collegeName + " is under waitlist consideration. Updates will be provided soon.");
+                        break;
+                    case 2:
+                        System.out.println("You're on the waitlist for " + collegeName + ". Updates on your status will follow shortly.");
+                        break;
+                    case 3:
+                        System.out.println("Your application to " + collegeName + " has been waitlisted. Anticipate further updates soon.");
+                        break;
+                }
                 waitlistColleges.add(collegeName);
             } else if (result.equals("Rejected")) {
-                System.out.println("We regret to inform you that your application to " + collegeName + " has been rejected.");
-            }            
-            else {
+                int v = (int) (Math.random() * 4);
+                switch (v) {
+                    case 0:
+                        System.out.println("We regret to inform you that your application to " + collegeName + " has been rejected.");
+                        break;
+                    case 1:
+                        System.out.println("Unfortunately, your application to " + collegeName + " was not successful. We appreciate your effort.");
+                        break;
+                    case 2:
+                        System.out.println("We're sorry to say that your application to " + collegeName + " was not accepted.");
+                        break;
+                    case 3:
+                        System.out.println("It's disappointing, but your application to " + collegeName + " has been declined.");
+                        break;
+                }
+            } else {
                 System.out.println("Error: Your application was not successfully submitted.");
             }
+            
 
             System.out.println("--------------------------------------------------------------------------------------------------------------");
             System.out.println();
