@@ -5,7 +5,12 @@ import java.util.Scanner;
 
 public class statsSimulator {
     public static double simulateGPA(Random random) {
-        return simulateScoreGPA(100.0, random);  // Simulate GPA between 0.00 and 100.00
+        System.out.println("Simulating GPA...");
+        double score1 = (Math.random() * 20 + 80);
+        double score2 = (Math.random() * 20 + 80);
+
+        return Math.round(Math.max(score1, score2) * 100.0) / 100.0;
+
     }
 
     Scanner input = new Scanner(System.in);
@@ -15,13 +20,14 @@ public class statsSimulator {
         do {
             System.out.print("Do you want to simulate an SAT score? (Yes / No): ");
             String simulateSAT = input.next();
-            System.out.println();
 
             if (simulateSAT.equalsIgnoreCase("Yes")) {
-                SAT = Math.max((random.nextInt(81) + 80) * 10, (random.nextInt(81) + 80) * 10);  // Simulate SAT score between 400 and 1600 in increments of 10
+                SAT = simulateScoreSAT(random);
+                System.out.println();
                 break;
             } else if (simulateSAT.equalsIgnoreCase("No")) {
                 SAT = 0;  // Set SAT to 0 for no SAT score
+                System.out.println();
                 break;
             } else {
                 System.out.println("Invalid input. Please enter Yes or No.");
@@ -36,13 +42,14 @@ public class statsSimulator {
         do {
             System.out.print("Do you want to simulate an ACT score? (Yes / No): ");
             String simulateACT = input.next();
-            System.out.println();
 
             if (simulateACT.equalsIgnoreCase("Yes")) {
-                ACT = Math.max(random.nextInt(16) + 20, random.nextInt(16) + 20);  // Simulate ACT score between 1 and 36
+                ACT = simulateScoreACT(random);
+                System.out.println();
                 break;
             } else if (simulateACT.equalsIgnoreCase("No")) {
                 ACT = 0;  // Set ACT to 0 for no ACT score
+                System.out.println();
                 break;
             } else {
                 System.out.println("Invalid input. Please enter Yes or No.");
@@ -62,43 +69,28 @@ public class statsSimulator {
         return Math.round((Math.max(Math.random() * 10.0, Math.random() * 10.0) * 100.0) / 100.0);  // Simulate extracurricular involvement between 0.0 and 10.0
     }
 
-    public static int simulateScoreSAT(int SAT, Random random) {
-        int minRange = Math.max(400, SAT - random.nextInt(100));
-        int maxRange = Math.min(1600, SAT + random.nextInt(100));
-    
-        int simulatedScore = (int) Math.round((random.nextDouble() * (maxRange - minRange) + minRange) / 10) * 10;
-        return simulatedScore;
+    public static int simulateScoreACT(Random random) {
+        System.out.println("Simulating ACT...");
+        int score1 = (int) (Math.random() * 10 + 26);
+        int score2 = (int) (Math.random() * 10 + 26);
+
+        return Math.round(Math.max(score1, score2));
     }
     
-    public static int simulateScoreACT(int ACT, Random random) {
-        int minRange = Math.max(1, ACT - random.nextInt(5));
-        int maxRange = Math.min(36, ACT + random.nextInt(5));
-    
-        int simulatedScore = Math.max(minRange, random.nextInt(maxRange - minRange + 1) + minRange);
-        return simulatedScore;
+    public static int simulateScoreSAT(Random random) {
+        System.out.println("Simulating SAT...");
+        int score1 = (int) (Math.random() * 600 + 1000);
+        int score2 = (int) (Math.random() * 600 + 1000);
+
+        return (int) Math.round(Math.max(score1, score2) / 10.0) * 10;
     }
 
     public static double simulateInterviewStrength(Random random) {
         return Math.round((Math.max(random.nextDouble() * 10.0, random.nextDouble() * 10.0)) * 100.0) / 100.0;  // Simulate interview strength between 0.0 and 10.0
     }
-    
-    public static double simulateScoreGPA(double GPA, Random random) {
-        double minRange1 = Math.max(0.0, GPA - random.nextDouble() * 20.0);  // Adjusted range for 0-100
-        double maxRange1 = Math.min(100.0, minRange1 + random.nextDouble() * 20.0);  // Adjusted range for 0-100
-    
-        double minRange2 = Math.max(0.0, GPA - random.nextDouble() * 20.0);  // Adjusted range for 0-100
-        double maxRange2 = Math.min(100.0, minRange2 + random.nextDouble() * 20.0);  // Adjusted range for 0-100
-    
-        double simulatedScore1 = Math.min(maxRange1, Math.round(random.nextDouble() * (maxRange1 - minRange1) + minRange1 * 100.0) / 100.0);
-        double simulatedScore2 = Math.min(maxRange2, Math.round(random.nextDouble() * (maxRange2 - minRange2) + minRange2 * 100.0) / 100.0);
-    
-        // Simulate twice and find the maximum
-        double maxSimulatedScore = Math.max(simulatedScore1, simulatedScore2);
-    
-        return Math.round(maxSimulatedScore * 100.0) / 100.0;  // Round to two decimal places
-    }
 
     public static double simulateRigor(Scanner input) {
+        System.out.println("Simulating Course Rigor...");
         double v1 = Math.random() * 10;
         double v2 = Math.random() * 10;
         double maxSimulatedScore = Math.max(v1, v2);

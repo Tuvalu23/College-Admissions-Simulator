@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Random;
 
@@ -141,12 +142,15 @@ private static List<String> collegeList = Arrays.asList(
 
     private static void simulateCompleteApplication(Scanner input, Random random) {
         String name = input("Enter your name: ");
+        System.out.println();
         double GPA = statsSimulator.simulateGPA(random);
         double essayStrength = statsSimulator.simulateEssayStrength(input);
         double extracurriculars = statsSimulator.simulateExtracurriculars(input);
         double courseRigor = statsSimulator.simulateRigor(input);
-        int SAT = statsSimulator.simulateSAT(input, random);
-        int ACT = statsSimulator.simulateACT(input, random);
+        System.out.println();
+        int SAT = statsSimulator.simulateScoreSAT(random);
+        int ACT = statsSimulator.simulateScoreACT(random);
+        System.out.println();
     
         printProfile(name, GPA, essayStrength, extracurriculars, courseRigor, SAT, ACT);
     
@@ -163,6 +167,7 @@ private static List<String> collegeList = Arrays.asList(
 
         System.out.println();
         System.out.println("Thank you for using the College Application Simulator!");
+        System.out.println();
     }    
 
     private static ArrayList<Double> interviewList(ArrayList<Integer> colleges, Random random) {
@@ -216,12 +221,15 @@ private static List<String> collegeList = Arrays.asList(
 
     private static void simulateApplicationQuestions(Scanner input, Random random) {
         String name = input("Enter your name: ");
+        System.out.println();
         double GPA = statsSimulator.simulateGPA(random);
         double essayStrength = statsSimulator.simulateEssayStrength(input);
         double extracurriculars = statsSimulator.simulateExtracurriculars(input);
         double courseRigor = statsSimulator.simulateRigor(input);
+        System.out.println();
         int SAT = statsSimulator.simulateSAT(input, random);
         int ACT = statsSimulator.simulateACT(input, random);
+        System.out.println();
     
         printProfile(name, GPA, extracurriculars, courseRigor, essayStrength, SAT, ACT);
     
@@ -237,6 +245,7 @@ private static List<String> collegeList = Arrays.asList(
     
         System.out.println();
         System.out.println("Thank you for using the College Application Simulator!");
+        System.out.println();
     }
     
     private static void manuallyEnterInformation(Scanner input) {
@@ -244,7 +253,7 @@ private static List<String> collegeList = Arrays.asList(
         double GPA = inputDoubleRange("Enter your GPA (between 0.00 and 100.00): ", 0.00, 100.00);
         double essayStrength = inputDoubleRange("Enter your essay strength (out of 10): ", 0, 10);
         double extracurriculars = inputDoubleRange("Enter your extracurricular activities strength (out of 10): ", 0, 10);
-        double courseRigor = inputDoubleRange("Please rate the level of rigor of the courses you took at your school: ", 0, 10);
+        double courseRigor = inputDoubleRange("Please rate the level of rigor of the courses you took at your school (out of 10): ", 0, 10);
 
     
         int SAT;
@@ -279,9 +288,10 @@ private static List<String> collegeList = Arrays.asList(
 
         System.out.println();
         System.out.println("Thank you for using the College Application Simulator!");
+        System.out.println();
     }
 
-    private static double inputDoubleRange(String prompt, double min, double max) {
+    public static double inputDoubleRange(String prompt, double min, double max) {
         double value;
         do {
             System.out.print(prompt);
@@ -660,41 +670,36 @@ private static List<String> collegeList = Arrays.asList(
 
         System.out.println();
 
-        int myCollegeID = 0;
-        boolean validInput = false;
+        int pos;
 
         if (!acceptedColleges.isEmpty()) {
-        while (!validInput) {
-            System.out.println("Which college would you like to attend? Enter the position of the college on this list:");
-            String input = scanner.next();
-            // Check if the input is an integer
-            if (input.matches("\\d+")) {
-                myCollegeID = Integer.parseInt(input);
-                // Check if the input is within the bounds of the accepted colleges list
-                if (myCollegeID >= 1 && myCollegeID <= acceptedColleges.size()) {
-                    validInput = true;  // Set the flag to exit the loop
-                } else {
-                    System.out.println("Invalid input. Please enter a valid position from the list.");
+                System.out.println("Which college would you like to attend? Enter the position of the college on this list:");
+                System.out.println(acceptedColleges);
+                scanner.next();
+                pos = scanner.nextInt();
+        
+                if (pos > 0 && pos <= acceptedColleges.size()) {
+                    System.out.println();
+                    System.out.println("--------------------------------------------------------------------------------------------------------------");
+                    System.out.println("You are now enrolled in " + acceptedColleges.get(pos - 1) + "! Congratulations!");
+                    System.out.println("--------------------------------------------------------------------------------------------------------------");
                     System.out.println();
                 }
-            } else {
-                System.out.println("Invalid input. Please enter a valid integer position from the list.");
-                System.out.println();
-            }
-        }
-        
+                else {
+                    System.out.println();
+                    System.out.println("--------------------------------------------------------------------------------------------------------------");
+                    System.out.println("Invalid input! All acceptances have expired. Your opportunity to select a college has ended.");
+                    System.out.println("--------------------------------------------------------------------------------------------------------------");
+                    System.out.println();
 
-if (validInput) {
-    System.out.println("--------------------------------------------------------------------------------------------------------------");
-    System.out.println("You are now enrolled in " + acceptedColleges.get(myCollegeID - 1) + "! Congratulations!");
-    System.out.println("--------------------------------------------------------------------------------------------------------------");
-    System.out.println();
-} 
-}else {
-    System.out.println("--------------------------------------------------------------------------------------------------------------");
-    System.out.println("Unfortunately, none of your college applications resulted in acceptance. Consider exploring opportunities at your local Community College to continue your academic journey.");
-    System.out.println("--------------------------------------------------------------------------------------------------------------");
-}
+                }
+            }
+        else  {
+            System.out.println();
+            System.out.println("--------------------------------------------------------------------------------------------------------------");
+            System.out.println("Unfortunately, none of your college applications resulted in acceptance. Consider exploring opportunities at your local Community College to continue your academic journey.");
+            System.out.println("--------------------------------------------------------------------------------------------------------------");
+        }
 
     }
     
