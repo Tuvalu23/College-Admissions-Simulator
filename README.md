@@ -55,6 +55,7 @@ This program is for educational and entertainment purposes only. Simulated admis
 - [ ] Add Early Decision option and Deferalls
 - [ ] Add a Demographics section for Admission
 - [ ] Add a Legacy option
+- [ ] Add Ivy Day
 - [ ] Ability to submit neiter ACT nor SAT
 - [ ] Out of state colleges vs. In state colleges
 - [x] Fix the chances
