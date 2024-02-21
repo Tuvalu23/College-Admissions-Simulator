@@ -10,7 +10,7 @@ The College Application Simulator is a Java-based program designed to simulate t
 (c) Manually enter information
 
 **Student Profile:**
-Collects and displays user information, including name, GPA, essay strength, extracurriculars, SAT, and ACT scores.
+Collects and displays user information, including name, GPA, essay strength, course rigor, extracurriculars, SAT, and ACT scores.
 Application Simulation:
 
 Allows users to simulate the application process by answering questions and receiving admission chances for a list of colleges.
@@ -19,7 +19,7 @@ Allows users to simulate the application process by answering questions and rece
 Option to randomly select colleges for application.
 
 **Recommended Colleges:**
-Recommends colleges based on simulated user statistics (GPA, SAT, ACT, essay strength, extracurriculars).
+Recommends colleges based on simulated user statistics (GPA, SAT, ACT, course rigor, essay strength, extracurriculars).
 
 **Interview Simulation:**
 Simulates interview strengths for each school.
@@ -28,7 +28,7 @@ Simulates interview strengths for each school.
 Calculates and displays admission chances for each college based on simulated application data.
 
 **Decision Making:**
-Simulates admission decisions (Admitted, Waitlisted, Rejected) for each college.
+Simulates admission decisions (Admitted, Waitlisted, Rejected, Scholarships) for each college. There are numerous decision messages implemented for variety.
 
 **Final College Decision:**
 Allows the user to choose a college from the accepted list.
