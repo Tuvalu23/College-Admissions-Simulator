@@ -57,10 +57,10 @@ This program is for educational and entertainment purposes only. Simulated admis
 - [ ] Add a Legacy option
 - [ ] Ability to submit neiter ACT nor SAT
 - [ ] Out of state colleges vs. In state colleges
-- [ ] Fix the chances
+- [x] Fix the chances
 - [x] Fix too many application bug
 - [ ] Fix recommended colleges bug
-- [ ] Add Scholarships
+- [x] Add Scholarships
 
 ## Author
 Me
