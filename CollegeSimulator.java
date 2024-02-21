@@ -144,20 +144,21 @@ private static List<String> collegeList = Arrays.asList(
         double GPA = statsSimulator.simulateGPA(random);
         double essayStrength = statsSimulator.simulateEssayStrength(input);
         double extracurriculars = statsSimulator.simulateExtracurriculars(input);
+        double courseRigor = statsSimulator.simulateRigor(input);
         int SAT = statsSimulator.simulateSAT(input, random);
         int ACT = statsSimulator.simulateACT(input, random);
     
-        printProfile(name, GPA, essayStrength, extracurriculars, SAT, ACT);
+        printProfile(name, GPA, essayStrength, extracurriculars, courseRigor, SAT, ACT);
     
         System.out.println();
-        ArrayList<Integer> colleges = collegeApplications(input, GPA, SAT, ACT, extracurriculars, essayStrength);
+        ArrayList<Integer> colleges = collegeApplications(input, GPA, SAT, ACT, extracurriculars, courseRigor, essayStrength);
         System.out.println();
 
         ArrayList<Double> interviewList = interviewList(colleges, random);
         System.out.println();
 
         ArrayList<Double> admissionChanceList = new ArrayList<Double>();
-        admissionChanceList = printResults(colleges, GPA, SAT, ACT, extracurriculars, essayStrength, interviewList);
+        admissionChanceList = printResults(colleges, GPA, SAT, ACT, extracurriculars, courseRigor, essayStrength, interviewList);
         makeCollegeDecisions(colleges, name, admissionChanceList);
 
         System.out.println();
@@ -178,7 +179,7 @@ private static List<String> collegeList = Arrays.asList(
 
     private static ArrayList<Double> printResults(ArrayList<Integer> colleges,
                                                      double GPA, int SAT, int ACT,
-                                                     double extracurriculars, double essayStrength, ArrayList<Double> interviewList) {
+                                                     double extracurriculars, double courseRigor, double essayStrength, ArrayList<Double> interviewList) {
     System.out.println("Simulating interview strength for each school:");
     
     // Separate lists for interview strengths and admission chances
@@ -190,7 +191,7 @@ private static List<String> collegeList = Arrays.asList(
         double interviewStrength = interviewList.get(i);
         interviewStrengthList.add(getCollegeById(colleges.get(i)) + ": Interview Strength - " + interviewStrength);
 
-        double admissionChance = collegeChances.chances(colleges.get(i), GPA, SAT, ACT, extracurriculars, essayStrength, interviewStrength);
+        double admissionChance = collegeChances.chances(colleges.get(i), GPA, SAT, ACT, extracurriculars, courseRigor, essayStrength, interviewStrength);
         chancesList.add(admissionChance);
         String formattedChance = String.format("%.2f", admissionChance);
         admissionChanceList.add(getCollegeById(colleges.get(i)) + ": Admission Chance - " + formattedChance + "% || (" + collegeChances.getType(admissionChance) + ")");
@@ -218,19 +219,20 @@ private static List<String> collegeList = Arrays.asList(
         double GPA = statsSimulator.simulateGPA(random);
         double essayStrength = statsSimulator.simulateEssayStrength(input);
         double extracurriculars = statsSimulator.simulateExtracurriculars(input);
+        double courseRigor = statsSimulator.simulateRigor(input);
         int SAT = statsSimulator.simulateSAT(input, random);
         int ACT = statsSimulator.simulateACT(input, random);
     
-        printProfile(name, GPA, essayStrength, extracurriculars, SAT, ACT);
+        printProfile(name, GPA, extracurriculars, courseRigor, essayStrength, SAT, ACT);
     
-        ArrayList<Integer> colleges = collegeApplications(input, GPA, SAT, ACT, extracurriculars, essayStrength);
+        ArrayList<Integer> colleges = collegeApplications(input, GPA, SAT, ACT, extracurriculars, courseRigor, essayStrength);
         System.out.println();
     
         ArrayList<Double> interviewList = interviewList(colleges, random);
         System.out.println();
 
         ArrayList<Double> admissionChanceList = new ArrayList<Double>();
-        admissionChanceList = printResults(colleges, GPA, SAT, ACT, extracurriculars, essayStrength, interviewList);
+        admissionChanceList = printResults(colleges, GPA, SAT, ACT, extracurriculars, courseRigor, essayStrength, interviewList);
         makeCollegeDecisions(colleges, name, admissionChanceList);
     
         System.out.println();
@@ -242,6 +244,8 @@ private static List<String> collegeList = Arrays.asList(
         double GPA = inputDoubleRange("Enter your GPA (between 0.00 and 100.00): ", 0.00, 100.00);
         double essayStrength = inputDoubleRange("Enter your essay strength (out of 10): ", 0, 10);
         double extracurriculars = inputDoubleRange("Enter your extracurricular activities strength (out of 10): ", 0, 10);
+        double courseRigor = inputDoubleRange("Please rate the level of rigor of the courses you took at your school: ", 0, 10);
+
     
         int SAT;
         do {
@@ -263,14 +267,14 @@ private static List<String> collegeList = Arrays.asList(
     
         Random random = new Random();
 
-        ArrayList<Integer> colleges = collegeApplications(input, GPA, SAT, ACT, extracurriculars, essayStrength);
-        printProfile(name, GPA, essayStrength, extracurriculars, SAT, ACT);
+        ArrayList<Integer> colleges = collegeApplications(input, GPA, SAT, ACT, extracurriculars, courseRigor, essayStrength);
+        printProfile(name, GPA, essayStrength, courseRigor, extracurriculars, SAT, ACT);
     
         ArrayList<Double> interviewList = interviewList(colleges, random);
         System.out.println();
 
         ArrayList<Double> admissionChanceList = new ArrayList<Double>();
-        admissionChanceList = printResults(colleges, GPA, SAT, ACT, extracurriculars, essayStrength, interviewList);
+        admissionChanceList = printResults(colleges, GPA, SAT, ACT, extracurriculars, courseRigor, essayStrength, interviewList);
         makeCollegeDecisions(colleges, name, admissionChanceList);
 
         System.out.println();
@@ -328,18 +332,19 @@ private static List<String> collegeList = Arrays.asList(
         return value;
     }
     
-    private static void printProfile(String name, double GPA, double essayStrength, double extracurriculars, int SAT, int ACT) {
+    private static void printProfile(String name, double GPA, double essayStrength, double extracurriculars, double courseRigor, int SAT, int ACT) {
         System.out.println("STUDENT PROFILE");
         System.out.println("Name: " + name);
         System.out.println("GPA: " + GPA);
         System.out.println("Essay Strength: " + essayStrength);
         System.out.println("Extracurriculars: " + extracurriculars);
+        System.out.println("Course Rigor: " + courseRigor);
         System.out.println("SAT: " + (SAT != 0 ? SAT : "N/A"));
         System.out.println("ACT: " + (ACT != 0 ? ACT : "N/A"));
         System.out.println();
     }
     
-    private static ArrayList<Integer> collegeApplications(Scanner input, double GPA, int SAT, int ACT, double extracurriculars, double essayStrength) {
+    private static ArrayList<Integer> collegeApplications(Scanner input, double GPA, int SAT, int ACT, double extracurriculars, double courseRigor, double essayStrength) {
         System.out.println();
         ArrayList<Integer> colleges = new ArrayList<>();
         int collegesLeft = 12;
@@ -410,7 +415,7 @@ private static List<String> collegeList = Arrays.asList(
             } else if (option.equals("c")) {
                 displayMenu = false;  // Don't display the menu when choosing recommended colleges
     
-                ArrayList<Integer> rec = statsSimulator.recommendedColleges(GPA, SAT, ACT, essayStrength, extracurriculars);
+                ArrayList<Integer> rec = statsSimulator.recommendedColleges(GPA, SAT, ACT, essayStrength, courseRigor, extracurriculars);
     
                 int size = Math.min(rec.size(), collegesLeft);  // Limit the size to available slots
                 for (int i = 0; i < size; i++) {

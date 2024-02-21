@@ -1,16 +1,16 @@
 public class collegeChances {
-    public static double chances(int college, double GPA, int SAT, int ACT, double extracurriculars, double essayStrength, double interview) {
-        double num = getStudentNum(GPA, SAT, ACT, extracurriculars, essayStrength, interview);
+    public static double chances(int college, double GPA, int SAT, int ACT, double extracurriculars, double courseRigor, double essayStrength, double interview) {
+        double num = getStudentNum(GPA, SAT, ACT, extracurriculars, courseRigor, essayStrength, interview);
         int tier = getStudentTier(num);
         if (college >= 1 && college <= 4) { // tier 1
             if (tier == 1) {
-                return (39 + (Math.random() * 8 - 4 - 2));
+                return (41 + (Math.random() * 8 - 4 - 2));
             }
             else if (tier == 2) {
-                return (33 + (Math.random() * 8 - 4 - 2));
+                return (34 + (Math.random() * 8 - 4 - 2));
             }
             else if (tier == 3) {
-                return (22 + (Math.random() * 8 - 4 - 2));
+                return (23 + (Math.random() * 8 - 4 - 2));
             }
             else if (tier == 4) {
                 return (15 + (Math.random() * 6 - 3 - 2));
@@ -285,44 +285,44 @@ public class collegeChances {
         }
     }
 
-    public static double getStudentNum(double GPA, int SAT, int ACT, double extracurriculars, double essayStrength, double interview) {
+    public static double getStudentNum(double GPA, int SAT, int ACT, double extracurriculars, double courseRigor, double essayStrength, double interview) {
         double num = 0;
-        // GPA 30 pts, SAT 15 pts, EC 25 pts, essay 15 pts, interview 15 pts
+        // GPA 25 pts, SAT 15 pts, EC 25 pts, essay 15 pts, interview 10 pts, rigor 10 pts
         if (GPA == 100) {
-            num += 30;
+            num += 25;
         }
         else if (GPA >= 99) {
-            num += 29;
+            num += 24.2;
         }
         else if (GPA >= 98) {
-            num += 27.5;
+            num += 22.7;
         }
         else if (GPA >= 97) {
-            num += 26.5;
+            num += 21.8;
         }
         else if (GPA >= 96) {
-            num += 25.5;
+            num += 20.7;
         }
         else if (GPA >= 95) {
-            num += 24;
+            num += 20;
         }
         else if (GPA >= 94) {
-            num += 23;
+            num += 19;
         }
         else if (GPA >= 92) {
-            num += 21;
+            num += 17;
         }
         else if (GPA >= 90) {
-            num += 18;
+            num += 15;
         }
         else if (GPA >= 88) {
-            num +=15;
+            num += 12.5;
         }
         else if (GPA >= 85) {
-            num += 11;
+            num += 9;
         }
         else if (GPA >= 81) {
-            num += 7;
+            num += 6;
         }
         else if (GPA >= 75) {
             num += 3;
@@ -382,33 +382,33 @@ else if (44.4 * ACT > SAT) {
     if (ACT == 36) {
         num += 15;
     } else if (ACT >= 35) {
-        num += 14;
+        num += 14.5;
     } else if (ACT >= 34) {
-        num += 13.2;
+        num += 14;
     } else if (ACT >= 33) {
-        num += 12.5;
+        num += 13.5;
     } else if (ACT >= 32) {
-        num += 11.5;
+        num += 12.5;
     } else if (ACT >= 31) {
-        num += 10.5;
+        num += 11.5;
     } else if (ACT >= 30) {
-        num += 9.3;
+        num += 10.3;
     } else if (ACT >= 29) {
-        num += 8.7;
+        num += 9.4;
     } else if (ACT >= 28) {
-        num += 7.6;
+        num += 8.8;
     } else if (ACT >= 27) {
-        num += 6.8;
+        num += 7.7;
     } else if (ACT >= 26) {
-        num += 6;
+        num += 6.4;
     } else if (ACT >= 25) {
-        num += 5;
+        num += 5.6;
     } else if (ACT >= 24) {
-        num += 4;
+        num += 4.8;
     } else if (ACT >= 23) {
-        num += 3;
+        num += 4;
     } else if (ACT >= 22) {
-        num += 2;
+        num += 3.4;
     }
     else {
         num++;
@@ -472,33 +472,8 @@ else if (44.4 * ACT > SAT) {
             num += 9;
         }
 
-        if (interview == 10) {
-            num += 15;
-        }
-        else if (interview > 9.3) {
-            num += 14;
-        }
-        else if (interview > 8.7) {
-            num += 13.4;
-        }
-        else if (interview > 8.0) {
-            num += 12.5;
-        }
-        else if (interview > 7) {
-            num += 10.7;
-        }
-        else if (interview > 6) {
-            num += 9.5;
-        }
-        else if (interview > 5.5) {
-            num += 8;
-        }
-        else if (interview > 4.5) {
-            num += 6.7;
-        }
-        else if (interview > 2.5) {
-            num += 4;
-        }
+        num += interview;
+        num += courseRigor;
     
         return num - Math.random() * 5;
     }

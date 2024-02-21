@@ -98,17 +98,24 @@ public class statsSimulator {
         return Math.round(maxSimulatedScore * 100.0) / 100.0;  // Round to two decimal places
     }
 
-     public static ArrayList<Integer> recommendedColleges(double GPA, int SAT, int ACT, double essayStrength, double extracurriculars) {
+    public static double simulateRigor(Scanner input) {
+        double v1 = Math.random() * 10;
+        double v2 = Math.random() * 10;
+        double maxSimulatedScore = Math.max(v1, v2);
+        return Math.round(maxSimulatedScore * 100.0) / 100.0;
+    }
+
+     public static ArrayList<Integer> recommendedColleges(double GPA, int SAT, int ACT, double essayStrength, double courseRigor, double extracurriculars) {
         // 3 safety
         // 3 target
         // 3 reach
         // 2 big reach
         // 2 large reach
-        double num = collegeChances.getStudentNum(GPA, SAT, ACT, extracurriculars, essayStrength, 0.0) - 15;
+        double num = collegeChances.getStudentNum(GPA, SAT, ACT, extracurriculars, courseRigor, essayStrength, 0.0) - 15;
         ArrayList<Integer> colleges = new ArrayList<Integer>();
         Random rand = new Random();
 
-        if (num > 80) { // tier 1 students
+        if (num > 85) { // tier 1 students
             for (int i = 0; i < 3; i++) {
                 colleges.add(rand.nextInt(15, 35));
             }
@@ -125,7 +132,7 @@ public class statsSimulator {
                 colleges.add(rand.nextInt(1, 5));
             }
         }
-        else if (num > 75) {
+        else if (num > 78) {
             for (int i = 0; i < 3; i++) {
                 colleges.add(rand.nextInt(20, 40));
             }
@@ -142,7 +149,7 @@ public class statsSimulator {
                 colleges.add(rand.nextInt(1, 7));
             }
         }
-        else if (num > 60) {
+        else if (num > 70) {
             for (int i = 0; i < 3; i++) {
                 colleges.add(rand.nextInt(25, 45));
             }
@@ -159,7 +166,7 @@ public class statsSimulator {
                 colleges.add(rand.nextInt(3, 10));
             }
         }
-        else if (num > 55) {
+        else if (num > 62) {
             for (int i = 0; i < 3; i++) {
                 colleges.add(rand.nextInt(30, 50));
             }
@@ -176,7 +183,7 @@ public class statsSimulator {
                 colleges.add(rand.nextInt(3, 10));
             }
         }
-        else if (num > 50) {
+        else if (num > 53) {
             for (int i = 0; i < 3; i++) {
                 colleges.add(rand.nextInt(35, 55));
             }
@@ -193,7 +200,7 @@ public class statsSimulator {
                 colleges.add(rand.nextInt(7, 20));
             }
         }
-        else if (num > 43) {
+        else if (num > 45) {
             for (int i = 0; i < 3; i++) {
                 colleges.add(rand.nextInt(40, 70));
             }
@@ -210,7 +217,7 @@ public class statsSimulator {
                 colleges.add(rand.nextInt(10, 24));
             }
         }
-        else if (num > 33) {
+        else if (num > 37) {
             for (int i = 0; i < 3; i++) {
                 colleges.add(rand.nextInt(55, 85));
             }
@@ -227,7 +234,7 @@ public class statsSimulator {
                 colleges.add(rand.nextInt(14, 30));
             }
         }
-        else if (num > 20) {
+        else if (num > 29) {
             for (int i = 0; i < 3; i++) {
                 colleges.add(rand.nextInt(65, 90));
             }
