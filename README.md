@@ -11,15 +11,20 @@ The College Application Simulator is a Java-based program designed to simulate t
 
 **Student Profile:**
 Collects and displays user information, including name, GPA, essay strength, course rigor, extracurriculars, SAT, and ACT scores.
-Application Simulation:
 
+**Demographic Features:**
+(a) Select ethnicity
+(b) Choose income level
+(c) Indicate if a student is the first generation to attend college
+
+**Application Simulation:**
 Allows users to simulate the application process by answering questions and receiving admission chances for a list of colleges.
 
 **Random College Selection:**
 Option to randomly select colleges for application.
 
 **Recommended Colleges:**
-Recommends colleges based on simulated user statistics (GPA, SAT, ACT, course rigor, essay strength, extracurriculars).
+Recommends colleges based on simulated user statistics (GPA, SAT, ACT, course rigor, essay strength, extracurriculars, demographics).
 
 **Interview Simulation:**
 Simulates interview strengths for each school.
@@ -52,16 +57,22 @@ Choose a college to attend from the accepted list.
 This program is for educational and entertainment purposes only. Simulated admission chances and decisions are based on predefined algorithms and do not reflect real-world college admission processes.
 
 ## Future Plans
-- [ ] Add Early Decision option and Deferalls
-- [ ] Add a Demographics section for Admission
-- [ ] Add a Legacy option
-- [ ] Add Ivy Day
-- [ ] Ability to submit neiter ACT nor SAT
-- [ ] Out of state colleges vs. In state colleges
-- [x] Fix the chances
-- [x] Fix too many application bug
-- [ ] Fix recommended colleges bug
-- [x] Add Scholarships
+## Future Plans
+- [ ] Add Early Decision option and Deferrals
+- [ ] Implement a Legacy option
+- [ ] Integrate Ivy Day events
+- [ ] Allow the submission of neither ACT nor SAT scores
+- [ ] Distinguish between out-of-state colleges vs. in-state colleges
+- [x] Fix admission chances calculation
+- [x] Address the issue of too many applications bug
+- [ ] Resolve bugs related to waitlist colleges
+- [x] Introduce a scholarship system
+- [X] Implement Demographics section for Admission
+- [ ] Option to actually take an interview
+- [ ] Provide feedback on application weaknesses
+- [ ] Include a Financial Aid simulation
+- [ ] Enhance user interface and experience
+
 
 ## Author
 Me
