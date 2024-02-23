@@ -1,13 +1,12 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Random;
 
 public class CollegeSimulator {
 private static List<String> collegeList = Arrays.asList(
-        "Harvard University",
+    "Harvard University",
     "Massachusetts Institute of Technology (MIT)",
     "Stanford University",
     "Yale University",
@@ -35,6 +34,7 @@ private static List<String> collegeList = Arrays.asList(
     "Carnegie Mellon University (CMU)",
     "Tufts University",
     "University of North Carolina at Chapel Hill (UNC Chapel Hill)",
+    "Northeastern University",
     "University of Virginia (UVA)",
     "University of Florida (UFlorida)",
     "Georgia Institute of Technology (Georgia Tech)",
@@ -55,7 +55,6 @@ private static List<String> collegeList = Arrays.asList(
     "Lehigh University",
     "University of California, Irvine (UCI)",
     "University of Miami",
-    "Northeastern University",
     "Texas A&M University",
     "Case Western Reserve University",
     "University of Maryland (UMD)",
@@ -141,28 +140,32 @@ private static List<String> collegeList = Arrays.asList(
     }
 
     private static void simulateCompleteApplication(Scanner input, Random random) {
-        String name = input("Enter your name: ");
+        String name = Input.input("Enter your name: ");
         System.out.println();
         double GPA = statsSimulator.simulateGPA(random);
         double essayStrength = statsSimulator.simulateEssayStrength(input);
         double extracurriculars = statsSimulator.simulateExtracurriculars(input);
         double courseRigor = statsSimulator.simulateRigor(input);
+        String ethnicity = statsSimulator.simulateEthnicity(input);
+        String income = statsSimulator.simulateIncome(input);
+        boolean firstGen = statsSimulator.simulateFirstGen(input);
+
         System.out.println();
         int SAT = statsSimulator.simulateScoreSAT(random);
         int ACT = statsSimulator.simulateScoreACT(random);
         System.out.println();
     
-        printProfile(name, GPA, essayStrength, extracurriculars, courseRigor, SAT, ACT);
+        printProfile(name, GPA, essayStrength, extracurriculars, courseRigor, SAT, ACT, ethnicity, income, firstGen);
     
         System.out.println();
-        ArrayList<Integer> colleges = collegeApplications(input, GPA, SAT, ACT, extracurriculars, courseRigor, essayStrength);
+        ArrayList<Integer> colleges = collegeApplications(input, GPA, SAT, ACT, extracurriculars, courseRigor, essayStrength, ethnicity, income, firstGen);
         System.out.println();
 
         ArrayList<Double> interviewList = interviewList(colleges, random);
         System.out.println();
 
         ArrayList<Double> admissionChanceList = new ArrayList<Double>();
-        admissionChanceList = printResults(colleges, GPA, SAT, ACT, extracurriculars, courseRigor, essayStrength, interviewList);
+        admissionChanceList = printResults(colleges, GPA, SAT, ACT, extracurriculars, courseRigor, essayStrength, interviewList, ethnicity, income, firstGen);
         makeCollegeDecisions(colleges, name, admissionChanceList);
 
         System.out.println();
@@ -184,7 +187,8 @@ private static List<String> collegeList = Arrays.asList(
 
     private static ArrayList<Double> printResults(ArrayList<Integer> colleges,
                                                      double GPA, int SAT, int ACT,
-                                                     double extracurriculars, double courseRigor, double essayStrength, ArrayList<Double> interviewList) {
+                                                     double extracurriculars, double courseRigor, double essayStrength, ArrayList<Double> interviewList,
+                                                     String ethnicity, String income, boolean firstGen) {
     System.out.println("Simulating interview strength for each school:");
     
     // Separate lists for interview strengths and admission chances
@@ -196,7 +200,7 @@ private static List<String> collegeList = Arrays.asList(
         double interviewStrength = interviewList.get(i);
         interviewStrengthList.add(getCollegeById(colleges.get(i)) + ": Interview Strength - " + interviewStrength);
 
-        double admissionChance = collegeChances.chances(colleges.get(i), GPA, SAT, ACT, extracurriculars, courseRigor, essayStrength, interviewStrength);
+        double admissionChance = collegeChances.chances(colleges.get(i), GPA, SAT, ACT, extracurriculars, courseRigor, essayStrength, interviewStrength, ethnicity, income, firstGen);
         chancesList.add(admissionChance);
         String formattedChance = String.format("%.2f", admissionChance);
         admissionChanceList.add(getCollegeById(colleges.get(i)) + ": Admission Chance - " + formattedChance + "% || (" + collegeChances.getType(admissionChance) + ")");
@@ -220,27 +224,43 @@ private static List<String> collegeList = Arrays.asList(
 }
 
     private static void simulateApplicationQuestions(Scanner input, Random random) {
-        String name = input("Enter your name: ");
+        String name = Input.input("Enter your name: ");
         System.out.println();
         double GPA = statsSimulator.simulateGPA(random);
         double essayStrength = statsSimulator.simulateEssayStrength(input);
         double extracurriculars = statsSimulator.simulateExtracurriculars(input);
         double courseRigor = statsSimulator.simulateRigor(input);
+
+        System.out.println();
+        System.out.println("Select your ethnicity:");
+        String ethnicityN = Input.input("1. White\n2. Black\n3. Hispanic\n4. Asian\n5. Native American\n6. Pacific Islander\n7. Middle Eastern \n");
+        System.out.println();
+        System.out.println("Select your income level:");
+        String incomeN = Input.input("1. Low Income\n2. Lower Middle Income\n3. Middle Income\n4. Upper Middle Income\n5. High Income \n");
+        System.out.println();
+
+        // convert numbers to actual ethniity/ income
+        
+        boolean firstGen = Input.inputBoolean(input, "Are you a first-generation college student? (Yes / No): ");
+
+        String ethnicity = statsSimulator.convertEthnicity(ethnicityN);
+        String income = statsSimulator.convertIncomeLevel(incomeN);
+
         System.out.println();
         int SAT = statsSimulator.simulateSAT(input, random);
         int ACT = statsSimulator.simulateACT(input, random);
         System.out.println();
     
-        printProfile(name, GPA, extracurriculars, courseRigor, essayStrength, SAT, ACT);
+        printProfile(name, GPA, extracurriculars, courseRigor, essayStrength, SAT, ACT, ethnicity, income, firstGen);
     
-        ArrayList<Integer> colleges = collegeApplications(input, GPA, SAT, ACT, extracurriculars, courseRigor, essayStrength);
+        ArrayList<Integer> colleges = collegeApplications(input, GPA, SAT, ACT, extracurriculars, courseRigor, essayStrength, ethnicity, income, firstGen);
         System.out.println();
     
         ArrayList<Double> interviewList = interviewList(colleges, random);
         System.out.println();
 
         ArrayList<Double> admissionChanceList = new ArrayList<Double>();
-        admissionChanceList = printResults(colleges, GPA, SAT, ACT, extracurriculars, courseRigor, essayStrength, interviewList);
+        admissionChanceList = printResults(colleges, GPA, SAT, ACT, extracurriculars, courseRigor, essayStrength, interviewList, ethnicity, income, firstGen);
         makeCollegeDecisions(colleges, name, admissionChanceList);
     
         System.out.println();
@@ -249,17 +269,25 @@ private static List<String> collegeList = Arrays.asList(
     }
     
     private static void manuallyEnterInformation(Scanner input) {
-        String name = input("Enter your name: ");
-        double GPA = inputDoubleRange("Enter your GPA (between 0.00 and 100.00): ", 0.00, 100.00);
-        double essayStrength = inputDoubleRange("Enter your essay strength (out of 10): ", 0, 10);
-        double extracurriculars = inputDoubleRange("Enter your extracurricular activities strength (out of 10): ", 0, 10);
-        double courseRigor = inputDoubleRange("Please rate the level of rigor of the courses you took at your school (out of 10): ", 0, 10);
-
+        String name = Input.input("Enter your name: ");
+        double GPA = Input.inputDoubleRange("Enter your GPA (between 0.00 and 100.00): ", 0.00, 100.00);
+        double essayStrength = Input.inputDoubleRange("Enter your essay strength (out of 10): ", 0, 10);
+        double extracurriculars = Input.inputDoubleRange("Enter your extracurricular activities strength (out of 10): ", 0, 10);
+        double courseRigor = Input.inputDoubleRange("Please rate the level of rigor of the courses you took at your school (out of 10): ", 0, 10);
+        
+        System.out.println();
+        System.out.println("Select your ethnicity:");
+        String ethnicityN = Input.input("1. White\n2. Black\n3. Hispanic\n4. Asian\n5. Native American\n6. Pacific Islander\n7. Middle Eastern \n");
+        System.out.println();
+        System.out.println("Select your income level:");
+        String incomeN = Input.input("1. Low Income\n2. Lower Middle Income\n3. Middle Income\n4. Upper Middle Income\n5. High Income \n");
+        System.out.println();
+        boolean firstGen = Input.inputBoolean(input, "Are you a first-generation college student? (Yes / No): ");
     
         int SAT;
         do {
             System.out.println();
-            SAT = inputInt("Enter your SAT score (0 if not applicable): ");
+            SAT = Input.inputInt("Enter your SAT score (0 if not applicable): ");
             if (SAT % 10 != 0 || (SAT > 0 && SAT < 400) || SAT > 1600) {
                 System.out.println("That SAT is not possible!");
             }
@@ -268,93 +296,50 @@ private static List<String> collegeList = Arrays.asList(
         int ACT;
         do {
             System.out.println();
-            ACT = inputInt("Enter your ACT score (0 if not applicable): ");
+            ACT = Input.inputInt("Enter your ACT score (0 if not applicable): ");
             if (ACT < 0 || ACT > 36) {
                 System.out.println("That ACT is not possible!");
             }
         } while (ACT < 0 || ACT > 36);
     
         Random random = new Random();
+        String ethnicity = statsSimulator.convertEthnicity(ethnicityN);
+        String income = statsSimulator.convertIncomeLevel(incomeN);
 
-        ArrayList<Integer> colleges = collegeApplications(input, GPA, SAT, ACT, extracurriculars, courseRigor, essayStrength);
-        printProfile(name, GPA, essayStrength, courseRigor, extracurriculars, SAT, ACT);
+        ArrayList<Integer> colleges = collegeApplications(input, GPA, SAT, ACT, extracurriculars, courseRigor, essayStrength, ethnicity, income, firstGen);
+        printProfile(name, GPA, essayStrength, courseRigor, extracurriculars, SAT, ACT, ethnicity, income, firstGen);
     
         ArrayList<Double> interviewList = interviewList(colleges, random);
         System.out.println();
 
         ArrayList<Double> admissionChanceList = new ArrayList<Double>();
-        admissionChanceList = printResults(colleges, GPA, SAT, ACT, extracurriculars, courseRigor, essayStrength, interviewList);
+        admissionChanceList = printResults(colleges, GPA, SAT, ACT, extracurriculars, courseRigor, essayStrength, interviewList, ethnicity, income, firstGen);
         makeCollegeDecisions(colleges, name, admissionChanceList);
 
         System.out.println();
         System.out.println("Thank you for using the College Application Simulator!");
         System.out.println();
     }
-
-    public static double inputDoubleRange(String prompt, double min, double max) {
-        double value;
-        do {
-            System.out.print(prompt);
-            value = inputDouble(prompt);
-            if (value < min || value > max) {
-                System.out.println("Value must be between " + min + " and " + max + "!");
-            } else {
-                break;
-            }
-        } while (true);
-        return value;
-    }
-
-    private static double inputDouble(String prompt) {
-        double value;
-        while (true) {
-            try {
-                value = Double.parseDouble(new Scanner(System.in).next());
-                break;
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter a valid number.");
-                System.out.println();
-            }
-        }
-        return value;
-    }
-
-    private static String input(String prompt) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print(prompt);
-        return scanner.next();
-    }
-
-    private static int inputInt(String prompt) {
-        int value = 0;
-        boolean isValidInput = false;
     
-        while (!isValidInput) {
-            try {
-                value = Integer.parseInt(input(prompt));
-                isValidInput = true; // Break out of the loop if parsing is successful
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter a valid number.");
-                System.out.println();
-            }
-        }
-    
-        return value;
-    }
-    
-    private static void printProfile(String name, double GPA, double essayStrength, double extracurriculars, double courseRigor, int SAT, int ACT) {
+    private static void printProfile(String name, double GPA, double essayStrength, double extracurriculars, double courseRigor, int SAT, int ACT, String ethnicity, String income, boolean firstGen) {
         System.out.println("STUDENT PROFILE");
         System.out.println("Name: " + name);
         System.out.println("GPA: " + GPA);
-        System.out.println("Essay Strength: " + essayStrength);
-        System.out.println("Extracurriculars: " + extracurriculars);
-        System.out.println("Course Rigor: " + courseRigor);
+        System.out.println("Essay Strength: " + essayStrength + "/10.0");
+        System.out.println("Extracurriculars: " + extracurriculars + "/10.0");
+        System.out.println("Course Rigor: " + courseRigor + "/10.0");
+        System.out.println();
+        System.out.println("Ethnicity: " + ethnicity);
+        System.out.println("Income: " + income);
+        System.out.println("First Gen: " + firstGen);
+        System.out.println("Demographic Rating: " + statsSimulator.demRating(ethnicity, income, firstGen) + "/10.0");
+        System.out.println();
         System.out.println("SAT: " + (SAT != 0 ? SAT : "N/A"));
         System.out.println("ACT: " + (ACT != 0 ? ACT : "N/A"));
         System.out.println();
     }
     
-    private static ArrayList<Integer> collegeApplications(Scanner input, double GPA, int SAT, int ACT, double extracurriculars, double courseRigor, double essayStrength) {
+    private static ArrayList<Integer> collegeApplications(Scanner input, double GPA, int SAT, int ACT, double extracurriculars, double courseRigor, double essayStrength, String ethnicity, String income, boolean firstGen) {
         System.out.println();
         ArrayList<Integer> colleges = new ArrayList<>();
         int collegesLeft = 12;
@@ -425,7 +410,7 @@ private static List<String> collegeList = Arrays.asList(
             } else if (option.equals("c")) {
                 displayMenu = false;  // Don't display the menu when choosing recommended colleges
     
-                ArrayList<Integer> rec = statsSimulator.recommendedColleges(GPA, SAT, ACT, essayStrength, courseRigor, extracurriculars);
+                ArrayList<Integer> rec = statsSimulator.recommendedColleges(GPA, SAT, ACT, essayStrength, courseRigor, extracurriculars, ethnicity, income, firstGen);
     
                 int size = Math.min(rec.size(), collegesLeft);  // Limit the size to available slots
                 for (int i = 0; i < size; i++) {

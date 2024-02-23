@@ -71,8 +71,8 @@ public class statsSimulator {
 
     public static int simulateScoreACT(Random random) {
         System.out.println("Simulating ACT...");
-        int score1 = (int) (Math.random() * 10 + 26);
-        int score2 = (int) (Math.random() * 10 + 26);
+        int score1 = (int) (Math.random() * 9 + 27);
+        int score2 = (int) (Math.random() * 9 + 27);
 
         return Math.round(Math.max(score1, score2));
     }
@@ -97,7 +97,88 @@ public class statsSimulator {
         return Math.round(maxSimulatedScore * 100.0) / 100.0;
     }
 
-     public static ArrayList<Integer> recommendedColleges(double GPA, int SAT, int ACT, double essayStrength, double courseRigor, double extracurriculars) {
+    public static String simulateEthnicity(Scanner input) {
+        System.out.println("Simulating ethnicity...");
+        int num = (int) (Math.random() * 7);
+        String[] races = {"White", "Black", "Hispanic", "Asian", "Native American", "Pacific Islander", "Mixed", "Middle Eastern"};
+
+        // Pick a random ethnicity
+        String ethnicity = races[num];
+
+        return ethnicity;
+    }
+
+    public static String simulateIncome(Scanner input) {
+        int num = (int) (Math.random() * 5);
+        System.out.println("Simulating income...");
+        String[] incomes = {"Low Income", "Lower Middle Income", "Middle Income", "Upper Middle Income", "High Income"};
+
+        // Pick a random income category
+        String income = incomes[num];
+
+        return income;
+    }
+
+    public static double demRating(String ethnicity, String income, boolean firstGen) {
+        double num = 0;
+
+        if (ethnicity.equals("White")) {
+            num += Math.random() * 3;
+        }
+        else if (ethnicity.equals("Asian")) {
+            num += Math.random() * 2.5;
+        }
+        else if (ethnicity.equals("Hispanic") || ethnicity.equals("Native American")) {
+            num += Math.random() * 6;
+        }
+        else if (ethnicity.equals("Pacific Islander")) {
+            num += Math.random() * 6;
+        }
+        else if (ethnicity.equals("Black")) {
+            num += Math.random() * 8;
+        }
+        else if (ethnicity.equals("Middle Eastern")) {
+            num += Math.random() * 5;
+        }
+
+        if (income.equals("Low Income")) {
+            num += Math.random() * 7;
+        }
+        else if (income.equals("Lower Middle Income")) {
+            num += Math.random() * 5.7;
+        }
+        else if (income.equals("Middle Income")) {
+            num += Math.random() * 3.5;
+        }
+        else if (income.equals("Upper Middle Income")) {
+            num += Math.random() * 4;
+        }
+        else if (income.equals("High Income")) {
+            num += Math.random() * 6;
+        }
+
+        if (firstGen == true) {
+            num += Math.random() * 7;
+        }
+        else {
+            num += Math.random() * 2.5;
+        }
+
+        if (num <= 10) {
+            return Math.round(num * 10.0) / 10.0;
+        }
+        else {
+            return 10.0;
+        }
+
+    }
+
+    public static boolean simulateFirstGen(Scanner input) {
+        int num = (int) (Math.random() * 2);
+        return num == 0;
+    }
+
+     public static ArrayList<Integer> recommendedColleges(double GPA, int SAT, int ACT, double essayStrength, double courseRigor, double extracurriculars, String ethnicity, String income, boolean firstGen) {
         // 3 safety
         // 3 target
         // 3 reach
@@ -277,7 +358,46 @@ public class statsSimulator {
         // Return the new list containing unique colleges
         return uniqueColleges;
     }
+
+    public static String convertEthnicity(String ethnicityN) {
+        switch (ethnicityN) {
+            case "1":
+                return "White";
+            case "2":
+                return "Black";
+            case "3":
+                return "Hispanic";
+            case "4":
+                return "Asian";
+            case "5":
+                return "Native American";
+            case "6":
+                return "Pacific Islander";
+            case "7":
+                return "Middle Eastern";
+            default:
+                System.out.println("Invalid input for ethnicity.");
+                // Handle invalid input (you can choose to exit, ask again, etc.)
+                return null;
+        }
+    }
     
-    
-    
+    public static String convertIncomeLevel(String incomeN) {
+        switch (incomeN) {
+            case "1":
+                return "Low Income";
+            case "2":
+                return "Lower Middle Income";
+            case "3":
+                return "Middle Income";
+            case "4":
+                return "Upper Middle Income";
+            case "5":
+                return "High Income";
+            default:
+                System.out.println("Invalid input for income level.");
+                // Handle invalid input (you can choose to exit, ask again, etc.)
+                return null;
+        }
+    }
 }
