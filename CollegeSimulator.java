@@ -306,8 +306,10 @@ private static List<String> collegeList = Arrays.asList(
         String ethnicity = statsSimulator.convertEthnicity(ethnicityN);
         String income = statsSimulator.convertIncomeLevel(incomeN);
 
-        ArrayList<Integer> colleges = collegeApplications(input, GPA, SAT, ACT, extracurriculars, courseRigor, essayStrength, ethnicity, income, firstGen);
+        System.out.println();
         printProfile(name, GPA, essayStrength, courseRigor, extracurriculars, SAT, ACT, ethnicity, income, firstGen);
+
+        ArrayList<Integer> colleges = collegeApplications(input, GPA, SAT, ACT, extracurriculars, courseRigor, essayStrength, ethnicity, income, firstGen);
     
         ArrayList<Double> interviewList = interviewList(colleges, random);
         System.out.println();
