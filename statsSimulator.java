@@ -123,42 +123,42 @@ public class statsSimulator {
         double num = 0;
 
         if (ethnicity.equals("White")) {
-            num += 1.5 + (Math.random() * 2) - 1;
+            num += 1 + (Math.random() * 2) - 1;
         }
         else if (ethnicity.equals("Asian")) {
-            num += 2 + (Math.random() * 2) - 1;
+            num += 1 + (Math.random() * 2) - 1;
         }
         else if (ethnicity.equals("Hispanic") || ethnicity.equals("Native American")) {
-            num += 4  + (Math.random() * 2) - 1;
+            num += 3  + (Math.random() * 2) - 1;
         }
         else if (ethnicity.equals("Pacific Islander")) {
-            num += 5 + (Math.random() * 2) - 1;
+            num += 4 + (Math.random() * 2) - 1;
         }
         else if (ethnicity.equals("Black")) {
-            num += 6 + (Math.random() * 2) - 1;
+            num += 5 + (Math.random() * 2) - 1;
         }
         else if (ethnicity.equals("Middle Eastern")) {
-            num += 4 + (Math.random() * 2) - 1;
+            num += 2.5 + (Math.random() * 2) - 1;
         }
 
         if (income.equals("Low Income")) {
-            num += 5 + (Math.random() * 2) - 1;
+            num += 3 + (Math.random() * 2) - 1;
         }
         else if (income.equals("Lower Middle Income")) {
-            num += 3 + (Math.random() * 2) - 1;
-        }
-        else if (income.equals("Middle Income")) {
             num += 2 + (Math.random() * 2) - 1;
         }
+        else if (income.equals("Middle Income")) {
+            num += 1 + (Math.random() * 2) - 1;
+        }
         else if (income.equals("Upper Middle Income")) {
-            num += 3 + (Math.random() * 2) - 1;
+            num += 1.5 + (Math.random() * 2) - 1;
         }
         else if (income.equals("High Income")) {
-            num += 4 + (Math.random() * 2) - 1;
+            num += 2.5 + (Math.random() * 2) - 1;
         }
 
         if (firstGen == true) {
-            num += 3 + (Math.random() * 2) - 1;
+            num += 2 + (Math.random() * 2) - 1;
         }
         else {
             num += (Math.random() * 2) - 1;
