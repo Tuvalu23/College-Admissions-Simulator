@@ -123,45 +123,45 @@ public class statsSimulator {
         double num = 0;
 
         if (ethnicity.equals("White")) {
-            num += Math.random() * 3;
+            num += 1.5 + (Math.random() * 2) - 1;
         }
         else if (ethnicity.equals("Asian")) {
-            num += Math.random() * 2.5;
+            num += 2 + (Math.random() * 2) - 1;
         }
         else if (ethnicity.equals("Hispanic") || ethnicity.equals("Native American")) {
-            num += Math.random() * 6;
+            num += 4  + (Math.random() * 2) - 1;
         }
         else if (ethnicity.equals("Pacific Islander")) {
-            num += Math.random() * 6;
+            num += 5 + (Math.random() * 2) - 1;
         }
         else if (ethnicity.equals("Black")) {
-            num += Math.random() * 8;
+            num += 6 + (Math.random() * 2) - 1;
         }
         else if (ethnicity.equals("Middle Eastern")) {
-            num += Math.random() * 5;
+            num += 4 + (Math.random() * 2) - 1;
         }
 
         if (income.equals("Low Income")) {
-            num += Math.random() * 7;
+            num += 5 + (Math.random() * 2) - 1;
         }
         else if (income.equals("Lower Middle Income")) {
-            num += Math.random() * 5.7;
+            num += 3 + (Math.random() * 2) - 1;
         }
         else if (income.equals("Middle Income")) {
-            num += Math.random() * 3.5;
+            num += 2 + (Math.random() * 2) - 1;
         }
         else if (income.equals("Upper Middle Income")) {
-            num += Math.random() * 4;
+            num += 3 + (Math.random() * 2) - 1;
         }
         else if (income.equals("High Income")) {
-            num += Math.random() * 6;
+            num += 4 + (Math.random() * 2) - 1;
         }
 
         if (firstGen == true) {
-            num += Math.random() * 7;
+            num += 3 + (Math.random() * 2) - 1;
         }
         else {
-            num += Math.random() * 2.5;
+            num += (Math.random() * 2) - 1;
         }
 
         if (num <= 10) {
