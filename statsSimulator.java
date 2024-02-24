@@ -123,10 +123,10 @@ public class statsSimulator {
         double num = 0;
 
         if (ethnicity.equals("White")) {
-            num += 1 + (Math.random() * 2) - 1;
+            num += (Math.random() * 2) - 1;
         }
         else if (ethnicity.equals("Asian")) {
-            num += 1 + (Math.random() * 2) - 1;
+            num += 0.5 + (Math.random() * 2) - 1;
         }
         else if (ethnicity.equals("Hispanic") || ethnicity.equals("Native American")) {
             num += 3  + (Math.random() * 2) - 1;
@@ -138,20 +138,20 @@ public class statsSimulator {
             num += 5 + (Math.random() * 2) - 1;
         }
         else if (ethnicity.equals("Middle Eastern")) {
-            num += 2.5 + (Math.random() * 2) - 1;
+            num += 2 + (Math.random() * 2) - 1;
         }
 
         if (income.equals("Low Income")) {
             num += 3 + (Math.random() * 2) - 1;
         }
         else if (income.equals("Lower Middle Income")) {
-            num += 2 + (Math.random() * 2) - 1;
+            num += 1.5 + (Math.random() * 2) - 1;
         }
         else if (income.equals("Middle Income")) {
-            num += 1 + (Math.random() * 2) - 1;
+            num += (Math.random() * 2) - 1;
         }
         else if (income.equals("Upper Middle Income")) {
-            num += 1.5 + (Math.random() * 2) - 1;
+            num += 1 + (Math.random() * 2) - 1;
         }
         else if (income.equals("High Income")) {
             num += 2.5 + (Math.random() * 2) - 1;
@@ -166,6 +166,9 @@ public class statsSimulator {
 
         if (num <= 10) {
             return Math.round(num * 10.0) / 10.0;
+        }
+        else if (num < 0) {
+            return 0.0;
         }
         else {
             return 10.0;
