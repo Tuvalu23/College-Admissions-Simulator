@@ -518,6 +518,11 @@ private static List<String> collegeList = Arrays.asList(
         ArrayList<String> acceptedColleges = new ArrayList<>();
         ArrayList<String> waitlistColleges = new ArrayList<>();
         ArrayList<String> scholarshipColleges = new ArrayList<>();
+        int curNum = 0;
+        double curAv = 0.0;
+        int score;
+        double avCAP;
+        int resulted = 0;
     
         for (int i = 0; i < colleges.length; i++) {
             String collegeName = getCollegeById(colleges[i]);
@@ -555,6 +560,7 @@ private static List<String> collegeList = Arrays.asList(
                         break;
                 }
                 scholarshipColleges.add(collegeName);
+                resulted++;
             } else if (result.equals("Admitted")) {
                 int v = (int) (Math.random() * 4);
                 switch (v) {
@@ -572,6 +578,7 @@ private static List<String> collegeList = Arrays.asList(
                         break;
                 }
                 acceptedColleges.add(collegeName);
+                resulted++;
             } else if (result.equals("Waitlisted")) {
                 int v = (int) (Math.random() * 4);
                 switch (v) {
@@ -605,12 +612,22 @@ private static List<String> collegeList = Arrays.asList(
                         System.out.println("It's disappointing, but your application to " + collegeName + " has been declined.");
                         break;
                 }
+                resulted++;
             } else {
                 System.out.println("Error: Your application was not successfully submitted.");
             }
             
 
             System.out.println("--------------------------------------------------------------------------------------------------------------");
+            System.out.println();
+
+            int funNum = calculateScore(acceptedColleges);
+            int bosNum = calculateSScore(scholarshipColleges);
+            curNum = bosNum + funNum;
+            curAv = calculateRawScore(resulted, curNum);
+
+            System.out.println("Your College Admission Points: " + curNum);
+            System.out.println("Your Average College Admission Points: " + curAv);
             System.out.println();
         }        
     }
@@ -632,24 +649,47 @@ private static List<String> collegeList = Arrays.asList(
             System.out.println(college);
         }
 
-        if (!waitlistColleges.isEmpty()) {
-            ArrayList<String> combinedColleges = Waitlist.waitlistResults(waitlistColleges);
-            acceptedColleges.addAll(combinedColleges);
+        if (waitlistColleges.isEmpty()) {
+            System.out.println();
+            System.out.println("Updated Accepted Colleges:");  // Change the label to indicate it's updated
+            for (String college : acceptedColleges) {
+                System.out.println(college);
+            }
+            for (String college : scholarshipColleges) {
+                System.out.println(college + " [SCHOLARSHIP]");
+            }
+
+            int score1 = calculateScore(acceptedColleges);
+            int score2 = calculateSScore(scholarshipColleges);
+
+            score = score1 + score2;
+            avCAP = calculateRawScore(12, score);
+        }
+        else {
+            System.out.println();
+            ArrayList<String> waitlistAccepted = Waitlist.waitlistResults(waitlistColleges);
+            System.out.println("Updated Accepted Colleges:");  // Change the label to indicate it's updated
+            for (String college : acceptedColleges) {
+                System.out.println(college);
+            }
+            for (String college : waitlistAccepted) {
+                System.out.println(college);
+            }
+            for (String college : scholarshipColleges) {
+                System.out.println(college + " [SCHOLARSHIP]");
+            }
+
+            int score1 = calculateScore(acceptedColleges);
+            int score2 = calculateSScore(scholarshipColleges);
+            int score3 = calculateWScore(waitlistAccepted);
+
+            score = score1 + score2 + score3;
+            avCAP = calculateRawScore(12, score);
+
+            acceptedColleges.addAll(waitlistAccepted);
         }
 
-        System.out.println();
-        System.out.println("Updated Accepted Colleges:");  // Change the label to indicate it's updated
-        for (String college : acceptedColleges) {
-            System.out.println(college);
-        }
-        for (String college : scholarshipColleges) {
-            System.out.println(college + " [SCHOLARSHIP]");
-        }
 
-        acceptedColleges.addAll(scholarshipColleges);
-
-        int score = calculateScore(acceptedColleges);
-        double avCAP = calculateRawScore(acceptedColleges, score);
 
         System.out.println();
         System.out.println("Your College Admission Points: " + score);
@@ -658,6 +698,9 @@ private static List<String> collegeList = Arrays.asList(
         System.out.println();
 
         int pos;
+
+        acceptedColleges.addAll(scholarshipColleges);
+
 
         if (!acceptedColleges.isEmpty()) {
                 System.out.println("Which college would you like to attend? Enter the position of the college on this list:");
@@ -707,41 +750,35 @@ private static List<String> collegeList = Arrays.asList(
     public static int calculateScore(ArrayList<String> acceptedColleges) {
         int score = 0;
         for (String college : acceptedColleges) {
-            if (getCollegeIdByName(college) < 4) {
-                score += 50;
-            }
-            else if (getCollegeIdByName(college) < 4) {
-                score += 50;
-            }
-            else if (getCollegeIdByName(college) < 11) {
-                score += 40;
-            }
-            else if (getCollegeIdByName(college) < 20) {
-                score += 30;
-            }
-            else if (getCollegeIdByName(college) < 34) {
-                score += 23;
-            }
-            else if (getCollegeIdByName(college) < 48) {
-                score += 18;
-            }
-            else if (getCollegeIdByName(college) < 66) {
-                score += 13;
-            }
-            else if (getCollegeIdByName(college) < 81) {
-                score += 9;
-            }
-            else {
-                score+= 5;
-            }
+            score += 100- getCollegeIdByName(college);
 
         }
 
-        return score;
+        return (int) (score);
     }
 
-    public static double calculateRawScore(ArrayList<String> acceptedColleges, int score) {
-        double rawScore = ((score / 12.0) / 100) * 100;
+    public static int calculateSScore(ArrayList<String> scholarshipColleges) {
+        int score = 0;
+        for (String college : scholarshipColleges) {
+            score += (100 - getCollegeIdByName(college)) * 1.5;
+
+        }
+
+        return (int) (score);
+    }
+
+    public static int calculateWScore(ArrayList<String> waitlistColleges) {
+        int score = 0;
+        for (String college : waitlistColleges) {
+            score += (100 - getCollegeIdByName(college)) * 0.5;
+
+        }
+
+        return (int) (score);
+    }
+
+    public static double calculateRawScore(int left, int score) {
+        double rawScore = ((score / (double) left) / 100) * 100;
         return Math.round(rawScore * 100.0) / 100.0;
     }
 
