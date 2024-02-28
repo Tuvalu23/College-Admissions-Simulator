@@ -100,7 +100,7 @@ public class statsSimulator {
     public static String simulateEthnicity(Scanner input) {
         System.out.println("Simulating ethnicity...");
         int num = (int) (Math.random() * 7);
-        String[] races = {"White", "Black", "Hispanic", "Asian", "Native American", "Pacific Islander", "Mixed", "Middle Eastern"};
+        String[] races = {"White", "Black", "Hispanic", "Asian", "Native American", "Pacific Islander", "Mixed", "Mixed"};
 
         // Pick a random ethnicity
         String ethnicity = races[num];
@@ -137,8 +137,8 @@ public class statsSimulator {
         else if (ethnicity.equals("Black")) {
             num += 5 + (Math.random() * 2) - 1;
         }
-        else if (ethnicity.equals("Middle Eastern")) {
-            num += 2 + (Math.random() * 2) - 1;
+        else if (ethnicity.equals("Mixed")) {
+            num += 3.6 + (Math.random() * 2) - 1;
         }
 
         if (income.equals("Low Income")) {
@@ -377,7 +377,7 @@ public class statsSimulator {
             case "6":
                 return "Pacific Islander";
             case "7":
-                return "Middle Eastern";
+                return "Mixed";
             default:
                 System.out.println("Invalid input for ethnicity.");
                 // Handle invalid input (you can choose to exit, ask again, etc.)

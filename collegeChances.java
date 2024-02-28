@@ -274,8 +274,8 @@ public class collegeChances {
         else if (ethnicity.equals("Black")) {
             num += Math.random() * 12;
         }
-        else if (ethnicity.equals("Middle Eastern")) {
-            num += Math.random() * 3;
+        else if (ethnicity.equals("Mixed")) {
+            num += Math.random() * 6;
         }
 
         if (income.equals("Low Income")) {

@@ -233,7 +233,7 @@ private static List<String> collegeList = Arrays.asList(
 
         System.out.println();
         System.out.println("Select your ethnicity:");
-        String ethnicityN = Input.input("1. White\n2. Black\n3. Hispanic\n4. Asian\n5. Native American\n6. Pacific Islander\n7. Middle Eastern \n");
+        String ethnicityN = Input.input("1. White\n2. Black\n3. Hispanic\n4. Asian\n5. Native American\n6. Pacific Islander\n7. Mixed\n");
         System.out.println();
         System.out.println("Select your income level:");
         String incomeN = Input.input("1. Low Income\n2. Lower Middle Income\n3. Middle Income\n4. Upper Middle Income\n5. High Income \n");
@@ -277,7 +277,7 @@ private static List<String> collegeList = Arrays.asList(
         
         System.out.println();
         System.out.println("Select your ethnicity:");
-        String ethnicityN = Input.input("1. White\n2. Black\n3. Hispanic\n4. Asian\n5. Native American\n6. Pacific Islander\n7. Middle Eastern \n");
+        String ethnicityN = Input.input("1. White\n2. Black\n3. Hispanic\n4. Asian\n5. Native American\n6. Pacific Islander\n7. Mixed \n");
         System.out.println();
         System.out.println("Select your income level:");
         String incomeN = Input.input("1. Low Income\n2. Lower Middle Income\n3. Middle Income\n4. Upper Middle Income\n5. High Income \n");
