@@ -100,7 +100,7 @@ public class statsSimulator {
     public static String simulateEthnicity(Scanner input) {
         System.out.println("Simulating ethnicity...");
         int num = (int) (Math.random() * 7);
-        String[] races = {"White", "Black", "Hispanic", "Asian", "Native American", "Pacific Islander", "Mixed", "Mixed"};
+        String[] races = {"White", "Black", "Hispanic", "Asian", "Native American", "Pacific Islander", "Mixed"};
 
         // Pick a random ethnicity
         String ethnicity = races[num];
