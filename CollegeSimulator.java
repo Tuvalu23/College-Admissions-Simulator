@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-
+ //hi
 public class CollegeSimulator {
 private static List<String> collegeList = Arrays.asList(
     "Harvard University",
