@@ -1,4 +1,4 @@
-public class collegeChances {
+public class collegeChances { 
     public static double chances(int college, double GPA, int SAT, int ACT, double extracurriculars, double courseRigor, double essayStrength, double interview, String ethnicity, String income, boolean firstGen) {
         double n = getStudentNum(GPA, SAT, ACT, extracurriculars, courseRigor, essayStrength, interview);
         int tier = getStudentTier(n);
