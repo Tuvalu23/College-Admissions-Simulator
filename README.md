@@ -1,81 +1,44 @@
-# CollegeSimulator
-
-## Overview
-The College Application Simulator is a Java-based program designed to simulate the college application process. It allows users to interact with a simulated college application system, answering questions related to academics, extracurriculars, and preferences to generate admission chances for various colleges. The program provides insights into admission possibilities, including interview strengths and admission chances for a list of predefined colleges.
+# College Application Simulator
+Welcome to the University Application Simulator! This program simulates a student's college application process, specifically designed for New York applicants at Stuyvesant High School. The data is based on trends and probabilities specific to Stuyvesant students, but admissions can always surprise you!
 
 ## Features
-**Simulation Options:**
-(a) Completely simulate the application
-(b) Go through the application questions and simulate answers
-(c) Manually enter information
+* Simulates the college application process with a focus on NY students at Stuyvesant High School.
+* Inputs:
+  - Name, GPA (100-point scale), SAT/ACT scores, extracurriculars, AP courses, essay strength, demographic information, and first-generation status.
+* Provides a weighted GPA and demographic score based on user inputs.
+* Allows users to apply for Early Decision (ED), Restrictive Early Action (REA), and Early Action (EA) at multiple schools.
+* Displays a college application profile based on input data.
+* Includes a college list with percentages, ED/EA deflators, and types of schools (private/public, REA).
 
-**Student Profile:**
-Collects and displays user information, including name, GPA, essay strength, course rigor, extracurriculars, SAT, and ACT scores.
+## How to Run
+1. Clone this repository
+2. Navigate to the project directory:
+3. Compile the Java program
+4. Run the program
 
-**Demographic Features:**
-(a) Select ethnicity
-(b) Choose income level
-(c) Indicate if a student is the first generation to attend college
-
-**Application Simulation:**
-Allows users to simulate the application process by answering questions and receiving admission chances for a list of colleges.
-
-**Random College Selection:**
-Option to randomly select colleges for application.
-
-**Recommended Colleges:**
-Recommends colleges based on simulated user statistics (GPA, SAT, ACT, course rigor, essay strength, extracurriculars, demographics).
-
-**Interview Simulation:**
-Simulates interview strengths for each school.
-
-**Admission Chances:**
-Calculates and displays admission chances for each college based on simulated application data.
-
-**Decision Making:**
-Simulates admission decisions (Admitted, Waitlisted, Rejected, Scholarships) for each college. There are numerous decision messages implemented for variety.
-
-**Final College Decision:**
-Allows the user to choose a college from the accepted list.
-
-**Score Calculation:**
-Calculates a score and average score based on the colleges accepted.
-
-**User-Friendly Input:**
-Provides user-friendly prompts and error handling for data input.
-
-**College List Management:**
-Manages a predefined list of colleges with associated IDs.
-
-## How to Use
-Run the program and choose an option (a, b, or c).
-Follow prompts to input data or simulate answers.
-Receive simulated admission chances, interview strengths, and final decisions.
-Choose a college to attend from the accepted list.
-
-## Note
-This program is for educational and entertainment purposes only. Simulated admission chances and decisions are based on predefined algorithms and do not reflect real-world college admission processes.
-
-## Future Plans
-## Future Plans
-- [ ] Add Early Decision option and Deferrals
-- [ ] Implement a Legacy option
-- [ ] Integrate Ivy Day events
-- [ ] Allow the submission of neither ACT nor SAT scores
-- [ ] Distinguish between out-of-state colleges vs. in-state colleges
-- [x] Fix admission chances calculation
-- [x] Address the issue of too many applications bug
-- [ ] Resolve bugs related to waitlist colleges
-- [x] Introduce a scholarship system
-- [X] Implement Demographics section for Admission
-- [ ] Option to actually take an interview
-- [ ] Provide feedback on application weaknesses
-- [ ] Include a Financial Aid simulation
-- [ ] Enhance user interface and experience
-
-
-## Author
-Me
+## Checklist
+Completed:
+- [X] College list with deflators and probabilities.
+- [X] Input validation for name, GPA, test scores, extracurriculars, and more.
+- [X] Early Decision (ED) and Early Action (EA) selection process.
+- [X] Demographic score and weighted GPA calculations.
+- [X] Display of college application profile.
+In Progress
+- [X] Regular Decision (RD) application logic.
+- [X] Incorporating acceptance probability calculations based on the user profile.
+- [X] Simulate interviews and display them
+- [X] ED Acceptance Logic
+- [X] REA Acceptance Logic
+- [X] EA Acceptance Logic
+- [X] RD Acceptance Logic
+- [ ] CA Points + Average Points Per School
+- [X] Select a school to commit to!
+- [X] ANSI formatting
 
 ## License
 This project is licensed under the MIT License.
+
+## Contributions
+Contributions are welcome! Feel free to submit a pull request or open an issue to suggest new features or improvements.
+
+> Created by Ben Rudinski.
