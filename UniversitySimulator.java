@@ -14,13 +14,13 @@ public class UniversitySimulator {
         {"Princeton University", "0.06", "N", "1.3", "REA"},
         {"Massachusetts Institute of Technology (MIT)", "0.06", "N", "1.2", "P"},
         {"Yale University", "0.07", "N", "1.3", "REA"},
-        {"Harvard University", "0.08", "N", "1.3", "REA"},
+        {"Harvard University", "0.06", "N", "1.3", "REA"},
         {"University of Chicago", "0.08", "2.5", "1.3", "P"},
         {"Johns Hopkins University", "0.05", "1.7", "N", "P"},
-        {"Dartmouth College", "0.09", "2.3", "N", "P"},
-        {"Brown University", "0.09", "2.0", "N", "P"},
-        {"Duke University", "0.10", "2.0", "N", "P"},
-        {"Northwestern University", "0.12", "2.2", "N", "P"},
+        {"Dartmouth College", "0.04", "2.3", "N", "P"},
+        {"Brown University", "0.07", "2.0", "N", "P"},
+        {"Duke University", "0.08", "2.0", "N", "P"},
+        {"Northwestern University", "0.09", "2.2", "N", "P"},
         {"Vanderbilt University", "0.12", "2.1", "N", "P"},
         {"Rice University", "0.07", "1.8", "N", "P"},
         {"Carnegie Mellon University (CMU)", "0.09", "1.6", "N", "P"},
@@ -32,16 +32,17 @@ public class UniversitySimulator {
         {"CUNY Macaulay Honors College", "0.20", "N", "N", "PUB"},
         {"Emory University", "0.14", "1.7", "N", "P"},
         {"Georgetown University", "0.25", "N", "1.3", "REA"},
-        {"University of Southern California (USC)", "0.17", "N", "1.3", "P"},
-        {"University of Virginia (UVA)", "0.15", "N", "1.3", "PUB"},
-        {"University of North Carolina Chapel-Hill", "0.24", "N", "1.4", "PUB"},
+        {"University of Southern California (USC)", "0.13", "N", "1.3", "P"},
+        {"University of Virginia (UVA)", "0.11", "N", "1.3", "PUB"},
+        {"University of North Carolina Chapel-Hill", "0.22", "N", "1.4", "PUB"},
         {"Tufts University", "0.12", "2.0", "N", "P"},
-        {"New York University (NYU)", "0.22", "1.5", "1.3", "P"},
+        {"New York University (NYU)", "0.19", "1.5", "1.3", "P"},
         {"Wake Forest University", "0.20", "2.1", "N", "P"},
         {"Boston College", "0.24", "1.8", "1.2", "P"},
+        {"Northeastern University", "0.24", "2.5", "1.2", "P"},
         {"Georgia Institute of Technology", "0.16", "N", "1.4", "PUB"},
         {"University of Texas at Austin", "0.30", "N", "1.2", "PUB"},
-        {"University of Wisconsin-Madison", "0.30", "N", "1.1", "PUB"},
+        {"University of Wisconsin-Madison", "0.37", "N", "1.1", "PUB"},
         {"University of California, San Diego (UCSD)", "0.40", "N", "N", "PUB"},
         {"University of California, Davis", "0.40", "N", "N", "PUB"},
         {"Villanova University", "0.35", "2.5", "1.2", "P"},
@@ -97,7 +98,7 @@ public class UniversitySimulator {
         {"University at Albany (SUNY)", "0.68", "N", "N", "PUB"},
         {"Hofstra University", "0.60", "N", "1.1", "P"},
         {"Ithaca College", "0.55", "N", "1.2", "P"},  
-        {"University at Buffalo (SUNY)", "0.87", "N", "1.2", "PUB"}  
+        {"University at Buffalo (SUNY)", "0.97", "N", "1.2", "PUB"}  
     };
 
     // ansi formatting
@@ -809,7 +810,7 @@ public class UniversitySimulator {
                 
                 System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------");
                 double chances = Double.parseDouble(application[4]);
-                String result = admissionsDecision(chances, "RD", i, collegesApplied);
+                String result = admissionsDecision(chances, "Waitlist", i, collegesApplied);
                 System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------");
                 System.out.println();
                 
@@ -874,6 +875,7 @@ public class UniversitySimulator {
                 }
             }
         
+            System.out.println();
             if (enrolledSchool != null) {
                 // Automatically enroll at the ED school
                 System.out.println(BRIGHT_GREEN + "You have been automatically enrolled at " + enrolledSchool + " due to Early Decision acceptance!" + RESET);
@@ -1578,6 +1580,33 @@ public class UniversitySimulator {
         if (interviewScore > 8) {
             chances += Math.random() * 7;
         }
+
+        if (collegeList[i][0].equals("Georgetown University")) {
+            if (gpa < 93) {
+                chances *= 0.3 + Math.random() * 0.35;
+            }
+            else if (gpa < 95) {
+                chances *= 0.5 + Math.random() * 0.4;
+            }
+            else if (gpa >= 95) {
+                chances *= 1.1 + Math.random() * 0.3;
+            }
+        }
+
+        if (collegeList[i][0].equals("University at Buffalo (SUNY)")) {
+            chances *= 1 + Math.random() * 1.2;
+        }
+
+        if (collegeList[i][0].equals("University of Chicago") || collegeList[i][0].equals("Northwestern University")) {
+            if (app_type.equals("RD")) {
+                chances *= 0.4 + Math.random() * 0.55;
+            }
+            else if (app_type.equals("ED")) {
+                chances *= 0.95 + Math.random() * 0.18;
+            }
+        }
+        chances += 5 - Math.random() * 15;
+
         if (chances <= 0.0) {
             chances = 0.0;
             chances += Math.random() * 1.5;
@@ -1665,7 +1694,7 @@ public class UniversitySimulator {
     }
 
     public static String admissionsDecision(double chances, String appType, int collegeIndex, ArrayList<String[]> collegesApplied) {
-        double yourFate = Math.min(Math.random() * 100, Math.random() * 100) + Math.random() * 15;
+        double yourFate = Math.min(Math.random() * 100, Math.random() * 100) + Math.random() * 23;
         String collegeName = collegesApplied.get(collegeIndex)[0];
         String reset = "\u001B[0m";
         String green = "\u001B[32m";
@@ -1674,17 +1703,17 @@ public class UniversitySimulator {
         String red = "\u001B[31m";
 
         if (appType.equals("ED")) {
-            if (yourFate < chances - Math.random() * 45) {
+            if (yourFate < chances - Math.random() * 55) {
                 System.out.println(green + "Congratulations! " + reset + "You have been admitted to " + blue + collegeName + reset + " with a scholarship and honors under Early Decision.");
                 return "ASH";  // Admitted with Scholarship & Honors
-            } else if (yourFate < chances - Math.random() * 22) {
+            } else if (yourFate < chances - Math.random() * 25) {
                 System.out.println(green + "Excellent news! " + reset + "You have been admitted to " + blue + collegeName + reset + " with a scholarship under Early Decision.");
                 return "AS";  // Admitted with Scholarship
             } else if (yourFate < chances) {
                 System.out.println("You have been accepted to " + blue + collegeName + reset + " under Early Decision. " + green + "Congratulations!");
                 return "A";  // Admitted
             } else if (yourFate < chances + Math.random() * 30) {
-                System.out.println("Your application to " + blue + collegeName + reset + " has been" + yellow + " deferred. We encourage you to remain hopeful and patient as the regular decision process continues.");
+                System.out.println("Your application to " + blue + collegeName + reset + " has been" + yellow + " deferred" + reset + ". We encourage you to remain hopeful and patient as the regular decision process continues.");
                 return "D";  // Deferred
             } else {
                 System.out.println("We regret to inform you that your application to " + blue + collegeName + reset + " has been " + red + "declined. Please remember that this is only one step in your journey, and many opportunities still lie ahead." + reset);
@@ -1692,10 +1721,10 @@ public class UniversitySimulator {
             }
         } else if (appType.equals("REA")) {
             // Regular Early Action section
-            if (yourFate < chances - Math.random() * 45) {
+            if (yourFate < chances - Math.random() * 55) {
                 System.out.println(green + "Wonderful news! " + reset + "You have been accepted to " + blue + collegeName + reset + " with a scholarship and honors through Restrictive Early Action.");
                 return "ASH";  // Admitted with Scholarship & Honors
-            } else if (yourFate < chances - Math.random() * 22) {
+            } else if (yourFate < chances - Math.random() * 25) {
                 System.out.println(green + "Great news! " + reset + "You have been accepted to " + blue + collegeName + reset + " with a scholarship through Restrictive Early Action.");
                 return "AS";  // Admitted with Scholarship
             } else if (yourFate < chances) {
@@ -1710,10 +1739,10 @@ public class UniversitySimulator {
             }
         } else if (appType.equals("EA")) {
             // Early Action section
-            if (yourFate < chances - Math.random() * 45) {
+            if (yourFate < chances - Math.random() * 55) {
                 System.out.println(green + "Fantastic! " + reset + "You have been accepted to " + blue + collegeName + reset + " with a scholarship and honors under Early Action.");
                 return "ASH";  // Admitted with Scholarship & Honors
-            } else if (yourFate < chances - Math.random() * 22) {
+            } else if (yourFate < chances - Math.random() * 25) {
                 System.out.println(green + "Great news! " + reset + "You have been accepted to " + blue + collegeName + reset + " with a scholarship under Early Action.");
                 return "AS";  // Admitted with Scholarship
             } else if (yourFate < chances) {
@@ -1728,10 +1757,10 @@ public class UniversitySimulator {
             }
         } else if (appType.equals("RD")) {
             // Regular Decision section
-            if (yourFate < chances - Math.random() * 45) {
+            if (yourFate < chances - Math.random() * 60) {
                 System.out.println(green + "Congratulations! " + reset + "You have been accepted to " + blue + collegeName + reset + " with a scholarship and honors under Regular Decision.");
                 return "ASH";  // Admitted with Scholarship & Honors
-            } else if (yourFate < chances - Math.random() * 22) {
+            } else if (yourFate < chances - Math.random() * 25) {
                 System.out.println(green + "Great news! " + reset + "You have been accepted to " + blue + collegeName + reset + " with a scholarship under Regular Decision.");
                 return "AS";  // Admitted with Scholarship
             } else if (yourFate < chances) {
